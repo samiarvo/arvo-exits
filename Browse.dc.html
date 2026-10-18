@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/styles.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/brand.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/elevation.css">
+<script src="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/_ds_bundle.js"></script>
+<script src="data.js"></script>
+<style>body{margin:0;background:#FAF8F5;color:var(--text-primary);-webkit-font-smoothing:antialiased}a{color:var(--text-link);text-decoration:none}a:hover{color:var(--arvo-orange);text-decoration:underline}</style>
+</helmet>
+<div style="min-height:100vh;background:#FAF8F5;font-family:var(--font-core);color:var(--text-primary)">
+  <div style="position:sticky;top:0;z-index:30;padding:clamp(8px,1.5vw,16px) clamp(8px,2vw,24px) 0;max-width:1392px;margin:0 auto">
+    <dc-import name="SiteHeader" active="browse" hint-size="100%,68px"></dc-import>
+  </div>
+
+  <main style="max-width:1392px;margin:0 auto;padding:clamp(16px,2.5vw,32px) clamp(12px,2vw,24px) 80px;display:grid;grid-template-columns:{{ mainCols }};gap:24px;align-items:start">
+    <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeSheet }}" style="position:fixed;inset:0;z-index:55;background:rgba(51,51,51,0.24)"></div></sc-if>
+    <aside data-screen-label="Filters" style="position:{{ A.position }};top:{{ A.top }};left:{{ A.left }};right:{{ A.right }};bottom:{{ A.bottom }};z-index:{{ A.z }};max-height:{{ A.maxHeight }};overflow-y:auto;box-sizing:border-box;display:{{ A.display }};flex-direction:column;border-radius:{{ A.radius }};background:#fff;box-shadow:{{ A.shadow }};scrollbar-width:thin;overscroll-behavior:contain">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid rgba(130,123,119,0.16)">
+        <span style="font:600 18px/22px var(--font-brand)">Filters</span>
+        <div style="display:flex;align-items:center;gap:8px"><button onClick="{{ reset }}" style="border:none;background:none;padding:0;min-height:36px;cursor:pointer;white-space:nowrap;font:500 13px/16px var(--font-core);color:var(--text-link)">Reset all</button><sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.IconButton" icon="FiX" type="ghost" label="Close filters" on-click="{{ closeSheet }}" hint-size="44px,44px"></x-import></sc-if></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;padding:20px">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span style="font:600 13px/16px var(--font-core);color:var(--text-primary);margin-bottom:6px">Community</span>
+          <sc-for list="{{ communities }}" as="c" hint-placeholder-count="6">
+            <label onClick="{{ c.toggle }}" style="display:flex;align-items:center;gap:10px;min-height:36px;cursor:pointer;font:400 14px/20px var(--font-core);color:var(--text-secondary)">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Checkbox" checked="{{ c.on }}" hint-size="16px,16px"></x-import>
+              <span style="flex:1">{{ c.label }}</span><span style="font-size:12px;color:var(--text-tertiary)">{{ c.count }}</span>
+            </label>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Developer</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ chipsDev }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.toggle }}" style="height:32px;padding:0 12px;border:none;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};box-shadow:inset 0 0 0 1px {{ c.ring }};font:500 13px/16px var(--font-core);cursor:pointer;white-space:nowrap">{{ c.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Project</span>
+          <div style="position:relative">
+            <span style="position:absolute;left:12px;top:12px;color:var(--text-tertiary);display:flex"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiSearch" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>
+            <input value="{{ q }}" onChange="{{ setQ }}" placeholder="Search project name" style="box-sizing:border-box;width:100%;height:40px;padding:0 12px 0 36px;border:none;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px var(--sand-7);font:400 14px/20px var(--font-core);color:var(--text-primary);outline:none" style-focus="box-shadow:inset 0 0 0 1px var(--sand-4)">
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Unit type</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ chipsType }}" as="c" hint-placeholder-count="8"><button onClick="{{ c.toggle }}" style="height:32px;padding:0 12px;border:none;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};box-shadow:inset 0 0 0 1px {{ c.ring }};font:500 13px/16px var(--font-core);cursor:pointer;white-space:nowrap">{{ c.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Budget for upfront payment</span>
+          <span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary);margin-top:-6px">What you pay the seller today</span>
+          <div style="display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;box-shadow:inset 0 0 0 1px var(--sand-7)">
+            <span style="font:500 13px/16px var(--font-core);color:var(--text-tertiary)">Up to AED</span>
+            <input value="{{ payMaxStr }}" onChange="{{ setPayMax }}" placeholder="Any" inputmode="numeric" style="flex:1;min-width:0;border:none;outline:none;background:none;font:600 15px/20px var(--font-brand);font-variant-numeric:tabular-nums;color:var(--text-primary)">
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ payPresets }}" as="p" hint-placeholder-count="4"><button onClick="{{ p.pick }}" style="height:28px;padding:0 10px;border:none;border-radius:8px;background:var(--arvo-chalk);color:var(--text-secondary);font:500 12px/16px var(--font-core);cursor:pointer">{{ p.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Total price</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <input value="{{ totMinStr }}" onChange="{{ setTotMin }}" placeholder="Min AED" style="box-sizing:border-box;width:100%;height:40px;padding:0 12px;border:none;border-radius:10px;box-shadow:inset 0 0 0 1px var(--sand-7);font:400 14px/20px var(--font-core);outline:none" style-focus="box-shadow:inset 0 0 0 1px var(--sand-4)">
+            <input value="{{ totMaxStr }}" onChange="{{ setTotMax }}" placeholder="Max AED" style="box-sizing:border-box;width:100%;height:40px;padding:0 12px;border:none;border-radius:10px;box-shadow:inset 0 0 0 1px var(--sand-7);font:400 14px/20px var(--font-core);outline:none" style-focus="box-shadow:inset 0 0 0 1px var(--sand-4)">
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Already paid</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ chipsPaid }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.toggle }}" style="height:32px;padding:0 12px;border:none;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};box-shadow:inset 0 0 0 1px {{ c.ring }};font:500 13px/16px var(--font-core);cursor:pointer;white-space:nowrap">{{ c.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Handover</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ chipsYear }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.toggle }}" style="height:32px;padding:0 12px;border:none;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};box-shadow:inset 0 0 0 1px {{ c.ring }};font:500 13px/16px var(--font-core);cursor:pointer;white-space:nowrap">{{ c.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Construction progress</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ chipsBuild }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.toggle }}" style="height:32px;padding:0 12px;border:none;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};box-shadow:inset 0 0 0 1px {{ c.ring }};font:500 13px/16px var(--font-core);cursor:pointer;white-space:nowrap">{{ c.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 13px/16px var(--font-core)">Discount vs. original price</span>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ chipsDisc }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.toggle }}" style="height:32px;padding:0 12px;border:none;border-radius:8px;background:{{ c.bg }};color:{{ c.fg }};box-shadow:inset 0 0 0 1px {{ c.ring }};font:500 13px/16px var(--font-core);cursor:pointer;white-space:nowrap">{{ c.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="padding-top:16px;border-top:1px solid rgba(130,123,119,0.16)">
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.SwitchLabel" checked="{{ php }}" on-change="{{ togglePhp }}" label="Post-handover payment plan" description="Only show units with installments after handover" hint-size="100%,44px"></x-import>
+        </div>
+      </div>
+      <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}"><div style="position:sticky;bottom:0;padding:12px 20px calc(16px + env(safe-area-inset-bottom));background:#fff;box-shadow:0 -1px 0 rgba(130,123,119,0.16)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" full-width="{{ true }}" on-click="{{ closeSheet }}" hint-size="100%,44px">{{ showLabel }}</x-import></div></sc-if>
+    </aside>
+
+    <section data-screen-label="Results" style="display:flex;flex-direction:column;gap:20px;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <h1 style="margin:0;font:500 36px/44px var(--font-display);letter-spacing:-0.02em;color:var(--sand-1)">Browse exits</h1>
+          <span style="display:flex;align-items:flex-start;gap:6px;font:400 15px/22px var(--font-core);color:var(--text-secondary)"><span style="color:var(--arvo-blue);display:flex;flex:none;margin-top:3px"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="ShieldFill" size="{{ 16 }}" hint-size="16px,16px"></x-import></span><span>{{ countLabel }}, all at or below the original contract price and checked against SPA and receipts</span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="secondary" size="small" left-icon="FiFilter" on-click="{{ openSheet }}" hint-size="110px,36px">{{ filterBtn }}</x-import></sc-if>
+          <div style="position:relative">
+            <button onClick="{{ toggleSort }}" style="display:flex;align-items:center;gap:8px;height:40px;padding:0 12px 0 14px;border:none;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px var(--sand-7);cursor:pointer;font:400 14px/20px var(--font-core);color:var(--text-secondary);white-space:nowrap">
+              Sort: <span style="font-weight:600;color:var(--text-primary)">{{ sortLabel }}</span>
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiChevronDown" size="{{ 16 }}" hint-size="16px,16px"></x-import>
+            </button>
+            <sc-if value="{{ sortOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;left:{{ dd.left }};right:{{ dd.right }};top:46px;z-index:10;width:240px;padding:6px;border-radius:12px;background:#fff;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:2px">
+                <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="4">
+                  <x-import component-from-global-scope="ArvoDesignSystem_dcb547.MenuItem" icon="{{ s.icon }}" active="{{ s.on }}" on-click="{{ s.pick }}" hint-size="100%,36px">{{ s.label }}</x-import>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.SegmentedControl" items="{{ views }}" value="{{ viewIdx }}" on-change="{{ setView }}" hint-size="150px,36px"></x-import>
+        </div>
+      </div>
+
+      <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+          <sc-for list="{{ activeTags }}" as="t" hint-placeholder-count="2">
+            <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Tag" dismissable="{{ true }}" on-dismiss="{{ t.remove }}" hint-size="80px,24px">{{ t.label }}</x-import>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+          <sc-for list="{{ skeletons }}" as="k" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;gap:14px;padding:8px 8px 20px;border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar)">
+              <div style="height:188px;border-radius:12px;background:var(--arvo-chalk)"></div>
+              <div style="display:flex;flex-direction:column;gap:8px;padding:0 8px">
+                <div style="width:70%;height:16px;border-radius:6px;background:var(--arvo-chalk)"></div>
+                <div style="width:50%;height:12px;border-radius:6px;background:var(--arvo-chalk)"></div>
+                <div style="width:40%;height:28px;border-radius:6px;background:var(--arvo-chalk);margin-top:12px"></div>
+                <div style="width:85%;height:12px;border-radius:6px;background:var(--arvo-chalk)"></div>
+                <div style="width:100%;height:6px;border-radius:999px;background:var(--arvo-chalk);margin-top:12px"></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:80px 24px;border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar);text-align:center">
+          <span style="width:56px;height:56px;border-radius:999px;background:var(--arvo-chalk);display:flex;align-items:center;justify-content:center;color:var(--text-secondary)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiSearch" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+          <span style="font:600 22px/28px var(--font-brand)">No exits match these filters</span>
+          <span style="font:400 15px/22px var(--font-core);color:var(--text-secondary);max-width:420px;text-wrap:pretty">Try a higher upfront budget or a wider handover window. You can also get notified when a matching exit is verified.</span>
+          <div style="display:flex;gap:10px;margin-top:8px">
+            <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="secondary" size="small" on-click="{{ reset }}" hint-size="130px,36px">reset filters</x-import>
+            <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" size="small" left-icon="FiBell" on-click="{{ goMatch }}" hint-size="170px,36px">notify me of matches</x-import>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+          <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+            <dc-import name="ListingCard" listing="{{ it.l }}" hint-size="100%,400px"></dc-import>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showMap }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:{{ mapCols }};gap:20px;align-items:start">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
+            <sc-for list="{{ items }}" as="it" hint-placeholder-count="4">
+              <div onMouseEnter="{{ it.enter }}" onMouseLeave="{{ it.leave }}">
+                <dc-import name="ListingCard" listing="{{ it.l }}" hint-size="100%,400px"></dc-import>
+              </div>
+            </sc-for>
+          </div>
+          <div style="order:{{ M.order }};position:{{ M.position }};top:{{ M.top }};height:{{ M.height }};min-height:{{ M.minHeight }};border-radius:16px;overflow:hidden;background:#ECE8E1;box-shadow:var(--shadow-topbar);background-image:linear-gradient(rgba(130,123,119,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(130,123,119,0.08) 1px,transparent 1px);background-size:48px 48px">
+            <div style="position:absolute;left:-30%;top:-40%;width:90%;height:70%;border-radius:0 0 60% 0;background:#D9E1E2;transform:rotate(-18deg)"></div>
+            <div style="position:absolute;left:60%;top:8%;width:8px;height:46%;border-radius:8px;background:#D9E1E2;transform:rotate(28deg)"></div>
+            <div style="position:absolute;left:-10%;top:58%;width:130%;height:3px;background:rgba(255,255,255,0.9);transform:rotate(-32deg)"></div>
+            <div style="position:absolute;left:20%;top:-10%;width:3px;height:130%;background:rgba(255,255,255,0.7);transform:rotate(14deg)"></div>
+            <sc-for list="{{ areaLabels }}" as="a" hint-placeholder-count="6">
+              <span style="position:absolute;left:{{ a.x }};top:{{ a.y }};font:500 11px/12px var(--font-core);letter-spacing:0.06em;text-transform:uppercase;color:var(--sand-5);white-space:nowrap">{{ a.name }}</span>
+            </sc-for>
+            <sc-for list="{{ items }}" as="it" hint-placeholder-count="0">
+              <button onClick="{{ it.open }}" onMouseEnter="{{ it.enter }}" onMouseLeave="{{ it.leave }}" style="position:absolute;left:{{ it.px }};top:{{ it.py }};transform:translate(-50%,-100%);z-index:{{ it.z }};display:flex;align-items:center;gap:3px;height:30px;padding:0 10px;border:none;border-radius:999px;background:{{ it.pinBg }};color:{{ it.pinFg }};box-shadow:var(--shadow-card);font:600 13px/1 var(--font-brand);font-variant-numeric:tabular-nums;cursor:pointer;white-space:nowrap"><span>AED {{ it.l.pin }}</span></button>
+            </sc-for>
+            <div style="position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:6px">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.IconButton" icon="FiPlus" type="secondary" size="small" label="Zoom in" hint-size="36px,36px"></x-import>
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.IconButton" icon="FiArrowDown" type="secondary" size="small" label="Zoom out" hint-size="36px,36px"></x-import>
+            </div>
+            <span style="position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.9);font:400 12px/16px var(--font-core);color:var(--text-secondary)">Pins show cash needed now</span>
+          </div>
+        </div>
+      </sc-if>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;demoState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Results&quot;,&quot;Loading&quot;,&quot;Empty&quot;],&quot;default&quot;:&quot;Results&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { view: 0, sort: 0, sortOpen: false, comm: [], dev: [], types: [], years: [], paidMin: 0, buildMin: 0, discMin: 0, php: false, q: '', payMax: null, totMin: null, totMax: null, hover: null, mob: window.innerWidth < 760, sheet: false };
+  componentDidMount() {
+    if (!window.ArvoExit) this._t = setInterval(() => { if (window.ArvoExit) { clearInterval(this._t); this.forceUpdate(); } }, 50);
+    this._r = () => { const m = window.innerWidth < 760; if (m !== this.state.mob) this.setState({ mob: m }); }; window.addEventListener('resize', this._r); this._r();
+  }
+  componentWillUnmount() { clearInterval(this._t); window.removeEventListener('resize', this._r); }
+  toggleIn(key, v) { this.setState((s) => ({ [key]: s[key].includes(v) ? s[key].filter((x) => x !== v) : [...s[key], v] })); }
+  chip(on, label, toggle) {
+    return { label, toggle, bg: on ? 'var(--sand-2)' : '#fff', fg: on ? '#fff' : 'var(--text-secondary)', ring: on ? 'var(--sand-2)' : 'var(--sand-7)' };
+  }
+  renderVals() {
+    const D = window.ArvoExit || { listings: [], fmt: (n) => n };
+    const s = this.state;
+    const num = (str) => { const n = parseInt(String(str).replace(/[^0-9]/g, ''), 10); return isNaN(n) ? null : n; };
+    const all = D.listings;
+    let list = all.filter((l) => !l.priv &&
+      (!s.comm.length || s.comm.includes(l.community)) &&
+      (!s.dev.length || s.dev.includes(l.developer)) &&
+      (!s.types.length || s.types.includes(l.beds)) &&
+      (!s.years.length || s.years.includes(l.handover.slice(3))) &&
+      (!s.q || l.project.toLowerCase().includes(s.q.toLowerCase())) &&
+      (s.payMax == null || l.pay <= s.payMax) &&
+      (s.totMin == null || l.total >= s.totMin) && (s.totMax == null || l.total <= s.totMax) &&
+      l.pct >= s.paidMin && l.construction >= s.buildMin && l.belowPct >= s.discMin && (!s.php || l.php));
+    const newest = [6, 1, 4, 10, 2, 5, 8, 3, 7, 9];
+    const sorters = [(a, b) => b.belowPct - a.belowPct, (a, b) => a.pay - b.pay, (a, b) => a.months - b.months, (a, b) => newest.indexOf(a.id) - newest.indexOf(b.id)];
+    list = [...list].sort(sorters[s.sort]);
+    const demo = this.props.demoState ?? 'Results';
+    const loading = demo === 'Loading';
+    const empty = demo === 'Empty' || (!loading && list.length === 0);
+    const sortDefs = [['Biggest discount', 'PercentFill'], ['Lowest cash needed now', 'FiWallet'], ['Soonest handover', 'FiCalendar'], ['Newest', 'FiClock']];
+    const comms = ['Dubai Hills Estate', 'Dubai Creek Harbour', 'JVC', 'Business Bay', 'Damac Lagoons', 'Arjan'];
+    const devs = [...new Set(all.map((l) => l.developer))];
+    const types = ['Studio', '1BR', '2BR', '3BR', '4BR', '5BR', 'Townhouse', 'Villa'];
+    const single = (key, opts, fmt) => opts.map((v) => this.chip(s[key] === v, fmt(v), () => this.setState({ [key]: v })));
+    const tags = [];
+    s.comm.forEach((v) => tags.push({ label: v, remove: () => this.toggleIn('comm', v) }));
+    s.dev.forEach((v) => tags.push({ label: v, remove: () => this.toggleIn('dev', v) }));
+    s.types.forEach((v) => tags.push({ label: v, remove: () => this.toggleIn('types', v) }));
+    s.years.forEach((v) => tags.push({ label: 'Handover ' + v, remove: () => this.toggleIn('years', v) }));
+    if (s.payMax != null) tags.push({ label: 'Pay today ≤ AED ' + D.fmt(s.payMax), remove: () => this.setState({ payMax: null }) });
+    if (s.paidMin) tags.push({ label: s.paidMin + '%+ paid', remove: () => this.setState({ paidMin: 0 }) });
+    if (s.buildMin) tags.push({ label: s.buildMin + '%+ built', remove: () => this.setState({ buildMin: 0 }) });
+    if (s.discMin) tags.push({ label: s.discMin + '%+ below', remove: () => this.setState({ discMin: 0 }) });
+    if (s.php) tags.push({ label: 'Post-handover plan', remove: () => this.setState({ php: false }) });
+    const mob = s.mob, open = mob && s.sheet;
+    const A = mob
+      ? { position: 'fixed', top: 'auto', left: '0', right: '0', bottom: '0', z: 60, maxHeight: '86vh', display: open ? 'flex' : 'none', radius: '20px 20px 0 0', shadow: 'var(--shadow-card)' }
+      : { position: 'sticky', top: '104px', left: 'auto', right: 'auto', bottom: 'auto', z: 1, maxHeight: 'calc(100vh - 120px)', display: 'flex', radius: '16px', shadow: 'var(--shadow-topbar)' };
+    const shown = loading ? 0 : empty ? 0 : list.length;
+    return {
+      mob, sheetOpen: open, A, openSheet: () => this.setState({ sheet: true }), closeSheet: () => this.setState({ sheet: false }),
+      mainCols: mob ? 'minmax(0,1fr)' : '288px minmax(0,1fr)',
+      filterBtn: tags.length ? 'filters · ' + tags.length : 'filters', showLabel: 'show ' + shown + ' exits',
+      dd: mob ? { left: '0', right: 'auto' } : { left: 'auto', right: '0' },
+      mapCols: mob ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1.15fr)',
+      M: mob ? { order: -1, position: 'relative', top: 'auto', height: '360px', minHeight: '0' } : { order: 0, position: 'sticky', top: '104px', height: 'calc(100vh - 128px)', minHeight: '520px' },
+      reset: () => this.setState({ comm: [], dev: [], types: [], years: [], paidMin: 0, buildMin: 0, discMin: 0, php: false, q: '', payMax: null, totMin: null, totMax: null }),
+      communities: comms.map((c) => ({ label: c, on: s.comm.includes(c), count: all.filter((l) => !l.priv && l.community === c).length, toggle: (e) => { e.preventDefault(); this.toggleIn('comm', c); } })),
+      chipsDev: devs.map((d) => this.chip(s.dev.includes(d), d, () => this.toggleIn('dev', d))),
+      chipsType: types.map((t) => this.chip(s.types.includes(t), t, () => this.toggleIn('types', t))),
+      chipsYear: ['2026', '2027', '2028', '2029'].map((y) => this.chip(s.years.includes(y), y, () => this.toggleIn('years', y))),
+      chipsPaid: single('paidMin', [0, 10, 25, 40], (v) => (v ? v + '%+' : 'Any')),
+      chipsBuild: single('buildMin', [0, 25, 50, 75], (v) => (v ? v + '%+' : 'Any')),
+      chipsDisc: single('discMin', [0, 1, 3, 5], (v) => (v ? v + '%+' : 'Any')),
+      q: s.q, setQ: (e) => this.setState({ q: e.target.value }),
+      payMaxStr: s.payMax == null ? '' : D.fmt(s.payMax), setPayMax: (e) => this.setState({ payMax: num(e.target.value) }),
+      payPresets: [200000, 400000, 600000, 800000].map((v) => ({ label: D.short(v), pick: () => this.setState({ payMax: v }) })),
+      totMinStr: s.totMin == null ? '' : D.fmt(s.totMin), setTotMin: (e) => this.setState({ totMin: num(e.target.value) }),
+      totMaxStr: s.totMax == null ? '' : D.fmt(s.totMax), setTotMax: (e) => this.setState({ totMax: num(e.target.value) }),
+      php: s.php, togglePhp: () => this.setState({ php: !s.php }),
+      countLabel: (loading ? '—' : empty ? 0 : list.length) + ' verified exits',
+      sortLabel: sortDefs[s.sort][0], sortOpen: s.sortOpen, toggleSort: () => this.setState({ sortOpen: !s.sortOpen }),
+      sorts: sortDefs.map(([label, icon], i) => ({ label, icon, on: i === s.sort, pick: () => this.setState({ sort: i, sortOpen: false }) })),
+      views: ['Grid', 'Map'], viewIdx: s.view, setView: (i) => this.setState({ view: i }),
+      hasActive: tags.length > 0, activeTags: tags,
+      isLoading: loading, isEmpty: empty, skeletons: [1, 2, 3, 4, 5, 6],
+      showGrid: !loading && !empty && s.view === 0, showMap: !loading && !empty && s.view === 1,
+      goMatch: () => { window.location.href = 'Buyer Match.dc.html'; },
+      areaLabels: [{ name: 'Business Bay', x: '54%', y: '33%' }, { name: 'Dubai Creek Harbour', x: '66%', y: '16%' }, { name: 'Dubai Hills Estate', x: '36%', y: '44%' }, { name: 'JVC', x: '14%', y: '74%' }, { name: 'Arjan', x: '9%', y: '56%' }, { name: 'Damac Lagoons', x: '26%', y: '90%' }],
+      items: list.map((l) => {
+        const h = s.hover === l.id;
+        return { l, px: l.x + '%', py: l.y + '%', z: h ? 5 : 1, pinBg: h ? 'var(--arvo-orange)' : '#fff', pinFg: h ? '#fff' : 'var(--text-primary)',
+          enter: () => this.setState({ hover: l.id }), leave: () => this.setState({ hover: null }), open: () => { window.location.href = l.href; } };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>

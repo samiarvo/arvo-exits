@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/styles.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/brand.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/elevation.css">
+<script src="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/_ds_bundle.js"></script>
+<script src="data.js"></script>
+<style>body{margin:0;background:#FAF8F5;color:var(--text-primary);-webkit-font-smoothing:antialiased}a{color:var(--text-link);text-decoration:none}a:hover{color:var(--arvo-orange);text-decoration:underline}</style>
+</helmet>
+<div style="min-height:100vh;background:#FAF8F5;font-family:var(--font-core);color:var(--text-primary)">
+  <div style="position:sticky;top:0;z-index:20;padding:clamp(8px,1.5vw,16px) clamp(8px,2vw,24px) 0;max-width:1392px;margin:0 auto">
+    <dc-import name="SiteHeader" active="" hint-size="100%,68px"></dc-import>
+  </div>
+
+  <main style="max-width:1312px;margin:0 auto;padding:0 clamp(16px,3vw,32px)">
+    <section data-screen-label="Hero" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:clamp(28px,5vw,56px);align-items:center;padding:clamp(28px,6vw,72px) 0 clamp(40px,5vw,64px)">
+      <div style="display:flex;flex-direction:column;gap:28px;max-width:600px">
+        <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:6px;height:28px;padding:0 12px 0 8px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px rgba(130,123,119,0.24);font:500 13px/16px var(--font-core);color:var(--text-secondary);white-space:nowrap">
+          <span style="color:var(--arvo-blue);display:flex"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="ShieldFill" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>Below cost, verified
+        </span>
+        <h1 style="margin:0;font:500 clamp(40px,6vw,68px)/1.06 var(--font-display);letter-spacing:-0.025em;color:var(--sand-1);text-wrap:balance">Off-plan units at or below cost.</h1>
+        <p style="margin:0;font:400 clamp(17px,1.6vw,20px)/1.5 var(--font-core);color:var(--text-secondary);max-width:520px;text-wrap:pretty">Sellers recover their cash. Buyers step in at the original price or less. Every number verified.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" right-icon="FiArrowRight" on-click="{{ goBrowse }}" hint-size="170px,44px">browse exits</x-import>
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="secondary" on-click="{{ goSell }}" hint-size="180px,44px">get my exit value</x-import>
+        </div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;font:400 13px/18px var(--font-core);color:var(--text-tertiary)">
+          <span style="display:flex;align-items:center;gap:6px"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiCheck" size="{{ 16 }}" hint-size="16px,16px"></x-import>Checked against SPA and receipts</span>
+          <span style="display:flex;align-items:center;gap:6px"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiCheck" size="{{ 16 }}" hint-size="16px,16px"></x-import>NOC and DLD transfer handled</span>
+        </div>
+      </div>
+
+      <div style="position:relative;min-height:clamp(480px,48vw,540px);border-radius:16px;overflow:hidden;background:#E9E2D8">
+        <img src="assets/images/dubai-hero.png" alt="Dubai skyline" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%">
+        <sc-if value="{{ showExample }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;left:clamp(12px,2vw,24px);bottom:clamp(12px,2vw,24px);width:min(380px,calc(100% - 24px));box-sizing:border-box;padding:clamp(16px,2vw,20px);border-radius:16px;background:rgba(255,255,255,0.96);box-shadow:var(--shadow-dome);display:flex;flex-direction:column;gap:14px;white-space:nowrap">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font:500 12px/16px var(--font-core);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary)">Worked example</span>
+              <span style="display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;background:var(--arvo-orange);color:#fff;font:600 13px/16px var(--font-brand)">1.9% below cost</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <span style="font:600 18px/22px var(--font-brand)">2 BR · Dubai Hills Estate</span>
+              <span style="font:400 13px/18px var(--font-core);color:var(--text-tertiary)">Handover Q4 2027 · 30% of plan paid</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;background:var(--arvo-chalk)">
+                <div style="width:30%;background:var(--sand-3)"></div>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font:400 12px/16px var(--font-core);color:var(--text-tertiary)"><span>Paid AED 555,000</span><span>Original AED 1,850,000</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;font:400 14px/20px var(--font-core);font-variant-numeric:tabular-nums">
+              <div style="display:flex;justify-content:space-between;color:var(--text-secondary)"><span>Seller has paid</span><span style="white-space:nowrap">AED 555,000</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="color:var(--text-secondary)">Seller exits for</span><span style="font:600 22px/1 var(--font-brand)">AED 520,000</span></div>
+              <div style="display:flex;justify-content:space-between;color:var(--text-secondary)"><span>Buyer takes over plan</span><span style="white-space:nowrap">AED 1,295,000</span></div>
+              <div style="display:flex;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(130,123,119,0.18)"><span style="color:var(--text-secondary)">Buyer’s total</span><span style="font-weight:600">AED 1,815,000</span></div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-radius:10px;background:var(--green-green-5);font:600 14px/18px var(--font-core);color:var(--green-800)">
+              <span>Buyer saves vs. original</span><span style="font-variant-numeric:tabular-nums">AED 35,000</span>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <sc-if value="{{ showStats }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="Stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar);overflow:hidden">
+        <div style="display:flex;flex-direction:column;gap:8px;padding:clamp(18px,2.5vw,28px);box-shadow:1px 0 0 rgba(130,123,119,0.16),0 1px 0 rgba(130,123,119,0.16)">
+          <span style="font:600 clamp(30px,3.4vw,40px)/1 var(--font-brand);font-variant-numeric:tabular-nums;color:var(--sand-1)">148</span>
+          <span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">Units listed</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding:clamp(18px,2.5vw,28px);box-shadow:1px 0 0 rgba(130,123,119,0.16),0 1px 0 rgba(130,123,119,0.16)">
+          <span style="display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums"><span style="font:600 20px/1 var(--font-brand);color:var(--text-secondary)">AED</span><span style="font:600 clamp(30px,3.4vw,40px)/1 var(--font-brand);color:var(--sand-1)">6.4M</span></span>
+          <span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">Total below original price</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding:clamp(18px,2.5vw,28px);box-shadow:1px 0 0 rgba(130,123,119,0.16),0 1px 0 rgba(130,123,119,0.16)">
+          <span style="font:600 clamp(30px,3.4vw,40px)/1 var(--font-brand);font-variant-numeric:tabular-nums;color:var(--green-800)">11.8%</span>
+          <span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">Average discount vs. current market value</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding:clamp(18px,2.5vw,28px);box-shadow:1px 0 0 rgba(130,123,119,0.16),0 1px 0 rgba(130,123,119,0.16)">
+          <span style="display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums"><span style="font:600 clamp(30px,3.4vw,40px)/1 var(--font-brand);color:var(--sand-1)">34</span><span style="font:600 20px/1 var(--font-brand);color:var(--text-secondary)">days</span></span>
+          <span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">Average to complete transfer</span>
+        </div>
+      </section>
+    </sc-if>
+
+    <section data-screen-label="Comparison" style="padding:clamp(64px,9vw,112px) 0 0;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:680px">
+        <span style="font:500 13px/16px var(--font-core);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary)">For sellers</span>
+        <h2 style="margin:0;font:500 clamp(30px,4vw,44px)/1.18 var(--font-display);letter-spacing:-0.02em;color:var(--sand-1);text-wrap:balance">Two ways out of an off-plan contract</h2>
+        <p style="margin:0;font:400 17px/26px var(--font-core);color:var(--text-secondary);text-wrap:pretty">Same unit, same AED 555,000 paid. Cancelling can cost you most of it. An exit hands your contract to a buyer and returns your cash.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px">
+        <div style="display:flex;flex-direction:column;gap:clamp(20px,2.5vw,28px);padding:clamp(20px,3vw,32px);border-radius:16px;background:#F3F0EB;box-shadow:inset 0 0 0 1px rgba(130,123,119,0.16)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="width:36px;height:36px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--text-secondary)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiXSquare" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+            <span style="white-space:nowrap;font:600 22px/26px var(--font-brand);color:var(--text-secondary)">Cancel with the developer</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font:400 14px/20px var(--font-core);color:var(--text-tertiary)">You may get back as little as</span>
+            <span style="display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums"><span style="font:600 22px/1 var(--font-brand);color:var(--text-tertiary)">AED</span><span style="font:600 clamp(40px,5vw,52px)/1 var(--font-brand);color:var(--text-secondary)">92,500</span></span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;height:14px;border-radius:999px;overflow:hidden;background:#fff">
+              <div style="width:83%;background:repeating-linear-gradient(135deg,var(--sand-5) 0 2px,var(--sand-6) 2px 6px)"></div>
+              <div style="width:17%;background:var(--sand-7)"></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font:400 12px/16px var(--font-core);color:var(--text-tertiary)"><span style="white-space:nowrap">Forfeited up to AED 462,500</span><span style="white-space:nowrap">Returned 17%</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-core);color:var(--text-secondary);font-variant-numeric:tabular-nums">
+            <div style="display:flex;justify-content:space-between;gap:16px"><span>Cash paid so far</span><span style="white-space:nowrap">AED 555,000</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px"><span>Developer may retain (up to 25% of price)</span><span style="white-space:nowrap">− AED 462,500</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px"><span>Timing</span><span>Set by the developer</span></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:clamp(20px,2.5vw,28px);padding:clamp(20px,3vw,32px);border-radius:16px;background:#fff;box-shadow:var(--shadow-dome)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="width:36px;height:36px;border-radius:10px;background:var(--arvo-orange);display:flex;align-items:center;justify-content:center;color:#fff"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiRepeat" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+            <span style="white-space:nowrap;font:600 22px/26px var(--font-brand)">Exit through Arvo Exit</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font:400 14px/20px var(--font-core);color:var(--text-tertiary)">You get back</span>
+            <span style="display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums"><span style="font:600 22px/1 var(--font-brand);color:var(--text-secondary)">AED</span><span style="font:600 clamp(40px,5vw,52px)/1 var(--font-brand);color:var(--sand-1)">520,000</span></span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;height:14px;border-radius:999px;overflow:hidden;background:var(--arvo-chalk)">
+              <div style="width:94%;background:var(--green-green-1)"></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font:400 12px/16px var(--font-core);color:var(--text-tertiary)"><span style="color:var(--green-800);font-weight:600;white-space:nowrap">Recovered 94% of cash paid</span><span style="white-space:nowrap">No-profit price</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-core);color:var(--text-secondary);font-variant-numeric:tabular-nums">
+            <div style="display:flex;justify-content:space-between;gap:16px"><span>Cash paid so far</span><span style="white-space:nowrap">AED 555,000</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px"><span>Agreed exit price (at or below cost)</span><span style="white-space:nowrap">AED 520,000</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px"><span>Arvo Exit seller fee</span><span style="color:var(--green-800);font-weight:600">Free</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="margin:0;font:400 12px/18px var(--font-core);color:var(--text-tertiary);max-width:760px">Illustrative figures for the worked example. Developer retention on cancellation depends on construction progress and your SPA terms.</p>
+    </section>
+
+    <section id="how" data-screen-label="Process" style="padding:clamp(64px,9vw,112px) 0 0;display:flex;flex-direction:column;gap:40px;scroll-margin-top:100px">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:680px">
+        <span style="font:500 13px/16px var(--font-core);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary)">How it works</span>
+        <h2 style="margin:0;font:500 clamp(30px,4vw,44px)/1.18 var(--font-display);letter-spacing:-0.02em;color:var(--sand-1);text-wrap:balance">One case manager, from contract to cash</h2>
+      </div>
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar);overflow:hidden">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+          <li style="display:flex;flex-direction:column;gap:12px;padding:clamp(20px,2.5vw,28px) 24px clamp(22px,2.5vw,32px);box-shadow:1px 0 0 rgba(130,123,119,0.16),0 1px 0 rgba(130,123,119,0.16)">
+            <span style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;background:var(--arvo-chalk);box-shadow:inset 0 0 0 1px var(--sand-7);font:600 16px/1 var(--font-brand);color:var(--text-primary)">{{ s.n }}</span>
+            <span style="font:600 19px/24px var(--font-brand);color:var(--text-primary)">{{ s.title }}</span>
+            <span style="font:400 14px/21px var(--font-core);color:var(--text-secondary);text-wrap:pretty">{{ s.body }}</span>
+            <span style="margin-top:auto;font:500 12px/16px var(--font-core);color:var(--text-tertiary)">{{ s.time }}</span>
+          </li>
+        </sc-for>
+      </ol>
+    </section>
+
+    <section data-screen-label="Standard" style="padding:clamp(64px,9vw,112px) 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:48px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font:500 13px/16px var(--font-core);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary)">Trust</span>
+        <h2 style="margin:0;font:500 clamp(30px,4vw,44px)/1.18 var(--font-display);letter-spacing:-0.02em;color:var(--sand-1)">The Arvo Exit Standard</h2>
+        <p style="margin:0;font:400 17px/26px var(--font-core);color:var(--text-secondary);max-width:440px;text-wrap:pretty">Four rules every listing follows. If a unit can’t meet them, it isn’t listed.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+        <sc-for list="{{ standard }}" as="t" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar)">
+            <span style="width:40px;height:40px;border-radius:12px;background:var(--arvo-chalk);display:flex;align-items:center;justify-content:center;color:var(--sand-2)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="{{ t.icon }}" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+            <span style="font:600 19px/24px var(--font-brand)">{{ t.title }}</span>
+            <span style="font:400 14px/21px var(--font-core);color:var(--text-secondary);text-wrap:pretty">{{ t.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-screen-label="Featured" style="padding:clamp(64px,9vw,112px) 0 0;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font:500 13px/16px var(--font-core);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary)">Featured exits</span>
+          <h2 style="margin:0;font:500 clamp(30px,4vw,44px)/1.18 var(--font-display);letter-spacing:-0.02em;color:var(--sand-1)">Listed this week</h2>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="ghost" size="small" right-icon="FiArrowRight" on-click="{{ goBrowse }}" hint-size="160px,36px">browse all exits</x-import>
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.IconButton" icon="FiChevronLeft" type="secondary" size="small" label="Previous" on-click="{{ prev }}" hint-size="36px,36px"></x-import>
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.IconButton" icon="FiChevronRight" type="secondary" size="small" label="Next" on-click="{{ next }}" hint-size="36px,36px"></x-import>
+        </div>
+      </div>
+      <div ref="{{ railRef }}" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 4px 16px;margin:0 -4px;scrollbar-width:none">
+        <sc-for list="{{ featured }}" as="l" hint-placeholder-count="4">
+          <div style="flex:none;width:316px;scroll-snap-align:start">
+            <dc-import name="ListingCard" listing="{{ l }}" hint-size="316px,400px"></dc-import>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <footer id="faq" style="margin-top:clamp(64px,9vw,112px);background:var(--sand-2);color:#fff">
+    <div style="max-width:1312px;margin:0 auto;padding:clamp(40px,6vw,64px) clamp(16px,3vw,32px) 40px;display:flex;flex-direction:column;gap:48px">
+      <div style="display:flex;flex-wrap:wrap;gap:40px">
+        <div style="display:flex;flex-direction:column;gap:16px;flex:2 1 300px;min-width:0">
+          <span style="display:flex;align-items:center;gap:12px"><svg viewBox="0 0 234 240" style="height:34px;width:auto;display:block" aria-hidden="true"><path d="M39.8133 0.811035L0 39.553V239.403H190.023L233.191 193.956H39.8133V0.811035ZM213.219 203.968L204.189 213.216H191.599L200.626 203.968H213.219ZM16.4387 36.9072V49.4858L7.17927 58.5013V45.9227L16.4387 36.9072ZM16.4387 68.061V80.6395L7.17927 89.655V77.0765L16.4387 68.061ZM16.4387 99.2113V111.79L7.17927 120.805V108.227L16.4387 99.2113ZM16.4387 130.365V142.94L7.17927 151.959V139.381L16.4387 130.365ZM16.4387 161.515V174.094L7.17927 183.109V170.531L16.4387 161.515ZM16.4387 192.666V205.248L7.17927 214.263V201.685L16.4387 192.666ZM32.634 21.1387V33.7172L23.3746 42.7327V30.1542L32.634 21.1387ZM32.634 52.289V64.8676L23.3746 73.8865V61.3079L32.634 52.289ZM32.634 83.4427V96.0213L23.3746 105.037V92.4582L32.634 83.4427ZM32.634 114.596V127.175L23.3746 136.191V123.612L32.634 114.596ZM32.634 145.747V158.325L23.3746 167.341V154.762L32.634 145.747ZM32.634 176.897V189.476L23.3746 198.495V185.913L32.634 176.897ZM19.8621 229.392L28.8884 220.143H41.4822L32.4558 229.392H19.8621ZM57.2697 203.968L48.2433 213.216H35.6496L44.6794 203.968H57.2697ZM51.0499 229.392L60.0797 220.143H72.6734L63.6437 229.392H51.0499ZM88.461 203.968L79.4346 213.216H66.8375L75.8673 203.968H88.461ZM82.2412 229.392L91.2676 220.143H103.861L94.8349 229.392H82.2412ZM119.649 203.968L110.622 213.216H98.0288L107.055 203.968H119.649ZM113.429 229.392L122.459 220.143H135.053L126.026 229.392H113.429ZM150.84 203.968L141.81 213.216H129.22L138.246 203.968H150.84ZM144.62 229.392L153.647 220.143H166.24L157.214 229.392H144.62ZM182.031 203.968L173.002 213.216H160.408L169.434 203.968H182.031ZM175.808 229.392L184.838 220.143H197.432L188.405 229.392H175.808Z" fill="currentColor"></path><path d="M153.569 181.784H164.946V68.1699H51.1917V79.53H153.569V181.784Z" fill="currentColor"></path><path d="M176.32 181.785H187.694V45.4468H51.1917V56.8103H176.32V181.785Z" fill="currentColor"></path><path d="M199.071 181.785H210.445V22.7231H51.1917V34.0866H199.071V181.785Z" fill="currentColor"></path><path d="M51.1917 0V11.3601H221.822V181.782H233.196V0H51.1917Z" fill="currentColor"></path></svg><svg viewBox="0 0 258 74" style="height:19px;width:auto;display:block" role="img" aria-label="Arvo"><path fill-rule="evenodd" clip-rule="evenodd" d="M37.985 1.02205C48.4743 1.02205 56.9775 9.71618 56.9775 20.4409V73.5873H42.9831V71.1141C40.2368 72.3745 37.1919 73.0763 33.9866 73.0763H17.9929C8.0557 73.0763 0 64.8398 0 54.6795V47.5252C0 37.3649 8.0557 29.1283 17.9929 29.1283H42.9831V20.4409C42.9831 17.6186 40.7454 15.3307 37.985 15.3307H5.74774L10.6462 1.02205H37.985ZM17.9929 41.3929C14.6805 41.3929 11.9953 44.1384 11.9953 47.5252V54.6795C11.9953 58.0662 14.6805 60.8118 17.9929 60.8118H33.9866C37.9441 60.8118 41.3634 58.4597 42.9831 55.0488V41.3929H17.9929Z" fill="currentColor"></path><path d="M107.424 0C117.874 7.67213e-05 126.404 8.61242 126.617 19.2961V32.1605C126.51 39.9006 121.925 46.6594 115.315 49.712L128.855 73.5873H112.543L100.067 51.4566H87.5924L91.8574 36.9574H107.104C110.09 36.9574 112.436 34.5591 112.436 31.5068V19.9499C112.436 16.8976 110.09 14.4993 107.104 14.4993H82.0477V73.5873H67.9732V0H107.424Z" fill="currentColor"></path><path d="M163.121 58.5431L178.476 0H193.083L173.784 73.5873H152.459L133.16 0H147.768L163.121 58.5431Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M238.364 0C248.92 0 257.557 8.83068 257.557 19.6235V53.9638C257.557 64.7567 248.92 73.5873 238.364 73.5873H220.238C209.683 73.5873 201.046 64.7567 201.046 53.9638V19.6235C201.046 8.83068 209.683 0 220.238 0H238.364ZM220.451 14.4993C217.573 14.4994 215.121 16.8977 215.12 19.9499V53.7463C215.12 56.6896 217.573 59.1967 220.451 59.1968H238.045C241.03 59.1967 243.376 56.6895 243.376 53.7463V19.9499C243.376 16.8977 241.03 14.4995 238.045 14.4993H220.451Z" fill="currentColor"></path></svg><span style="width:1px;height:20px;background:rgba(255,255,255,0.3)"></span><span style="font:600 24px/1 var(--font-brand)">Exit</span></span>
+          <span style="font:400 14px/21px var(--font-core);color:var(--sand-6);max-width:340px">No-profit exits for Dubai off-plan contracts. Every figure checked against the SPA, the developer statement of account and payment receipts.</span>
+        </div>
+        <div style="flex:1 1 130px;display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-core)">
+          <span style="font:600 14px/20px var(--font-brand);color:var(--sand-6)">Buy</span>
+          <a href="Browse.dc.html" style="color:#fff">Browse exits</a><a href="Buyer Match.dc.html" style="color:#fff">Register as a buyer</a><a href="Dashboard.dc.html" style="color:#fff">Saved exits</a>
+        </div>
+        <div style="flex:1 1 130px;display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-core)">
+          <span style="font:600 14px/20px var(--font-brand);color:var(--sand-6)">Sell</span>
+          <a href="Sell Wizard.dc.html" style="color:#fff">Get my exit value</a><a href="#how" style="color:#fff">How it works</a><a href="Dashboard.dc.html" style="color:#fff">Track my exit</a>
+        </div>
+        <div style="flex:1 1 130px;display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-core)">
+          <span style="font:600 14px/20px var(--font-brand);color:var(--sand-6)">Company</span>
+          <a href="#faq" style="color:#fff">FAQ</a><a href="#" style="color:#fff">Contact</a><a href="#" style="color:#fff">Privacy</a>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,0.12);font:400 12px/18px var(--font-core);color:var(--sand-6)">
+        <span>© 2026 Arvo Exit · RERA ORN: Insert number here</span>
+        <span>Figures are indicative and subject to developer NOC and final contract review.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroVisual&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Worked example&quot;,&quot;Photo only&quot;],&quot;default&quot;:&quot;Worked example&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showStats&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  railRef = React.createRef();
+  componentDidMount() {
+    if (!window.ArvoExit) this._t = setInterval(() => { if (window.ArvoExit) { clearInterval(this._t); this.forceUpdate(); } }, 50);
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+  renderVals() {
+    const D = window.ArvoExit || { listings: [] };
+    const scroll = (d) => () => { const el = this.railRef.current; if (el) el.scrollBy({ left: d * 336, behavior: 'smooth' }); };
+    return {
+      showExample: (this.props.heroVisual ?? 'Worked example') === 'Worked example',
+      showStats: this.props.showStats ?? true,
+      goBrowse: () => { window.location.href = 'Browse.dc.html'; },
+      goSell: () => { window.location.href = 'Sell Wizard.dc.html'; },
+      railRef: this.railRef, prev: scroll(-1), next: scroll(1),
+      featured: [1, 2, 5, 6, 4, 9].map((id) => D.listings.find((l) => l.id === id)).filter(Boolean),
+      steps: [
+        { n: 1, title: 'Submit contract', body: 'Share your SPA, statement of account and receipts. Takes about ten minutes.', time: 'Day 1' },
+        { n: 2, title: 'We verify', body: 'Every figure is checked against the developer’s records before anything is shown.', time: '2–3 working days' },
+        { n: 3, title: 'Listed or matched privately', body: 'Go public, or let us introduce you only to registered buyers who fit.', time: 'Average 12 days to offer' },
+        { n: 4, title: 'Developer NOC & DLD transfer', body: 'We request the NOC and book the Oqood assignment at the Land Department.', time: '7–21 days' },
+        { n: 5, title: 'Seller paid', body: 'Funds release to you on the day the contract transfers to the buyer.', time: 'Same day as transfer' },
+      ],
+      standard: [
+        { icon: 'ShieldFill', title: 'Verified figures', body: 'Price paid, amount outstanding and payment dates are checked against the SPA, statement of account and receipts.' },
+        { icon: 'FiSlash', title: 'No premium allowed', body: 'An exit price can never exceed what the seller has paid. Buyers never pay above the original contract price.' },
+        { icon: 'FiWallet', title: 'Free for sellers', body: 'No listing fee and no commission. The buyer pays a disclosed fee at transfer.' },
+        { icon: 'FiLock', title: 'Private exit option', body: 'Skip the public listing. We match you only with verified buyers whose budget fits.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

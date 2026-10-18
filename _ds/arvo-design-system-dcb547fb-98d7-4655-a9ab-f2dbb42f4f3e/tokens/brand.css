@@ -1,0 +1,45 @@
+/* Arvo — brand-level semantic aliases layered on top of the raw Figma
+   variables in fig-tokens.css. Base values are all read from the .fig. */
+:root {
+  /* Brand */
+  --arvo-orange: rgb(238,79,0);        /* Primary / Orange — buttons, CTA */
+  --arvo-orange-hot: rgb(237,51,0);    /* Orange 1 — logo mark, pressed CTA */
+  --arvo-orange-2: rgb(255,110,65);
+  --arvo-orange-3: rgb(255,147,107);
+  --arvo-orange-4: rgb(255,183,150);
+  --arvo-blue: rgb(0,93,130);          /* Primary / Blue — verified, links */
+  --arvo-mortar: rgb(81,81,81);        /* Primary / Mortar — wordmark */
+  --arvo-chalk: rgb(246,246,239);      /* Primary / Chalk — secondary surface */
+
+  /* Sand neutral ramp (the product's true neutral, not gray) */
+  --sand-1: rgb(19,19,19);
+  --sand-2: rgb(37,35,34);
+  --sand-3: rgb(53,50,49);
+  --sand-4: rgb(76,71,68);
+  --sand-5: rgb(130,123,119);
+  --sand-6: rgb(175,167,162);
+  --sand-7: rgb(214,207,204);
+
+  /* Surfaces */
+  --surface-page: rgb(244,244,241);
+  --surface-card: rgb(255,255,255);
+  --surface-card-medium: rgb(251,251,249);
+  --surface-doc: rgb(255,255,255);
+  --surface-doc-alt: rgb(247,247,247);
+  --card-outline: rgba(130,123,119,0.4);
+  --card-outline-bright: rgb(217,217,217);
+
+  /* Text */
+  --text-primary: rgb(37,35,34);
+  --text-secondary: rgb(76,71,68);
+  --text-tertiary: rgb(130,123,119);
+  --text-inverse: rgb(255,255,255);
+  --text-link: rgb(0,93,130);
+
+  /* Interaction — measured from the file's Hover/Pressed/Disabled variants */
+  --state-disabled-opacity: 0.6; /* @kind other */
+  --state-hover-tint: rgba(130,123,119,0.08);
+  --overlay-scrim: rgba(51,51,51,0.24);
+}
+a{color:var(--text-link);text-decoration:none}
+a:hover{color:var(--arvo-orange);text-decoration:underline}

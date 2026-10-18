@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/styles.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/brand.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/elevation.css">
+<script src="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/_ds_bundle.js"></script>
+<script src="data.js"></script>
+<style>body{margin:0;background:#FAF8F5;color:var(--text-primary);-webkit-font-smoothing:antialiased}a{color:var(--text-link);text-decoration:none}a:hover{color:var(--arvo-orange);text-decoration:underline}</style>
+</helmet>
+<div style="min-height:100vh;background:#FAF8F5;font-family:var(--font-core);color:var(--text-primary)">
+  <div style="position:sticky;top:0;z-index:30;padding:clamp(8px,1.5vw,16px) clamp(8px,2vw,24px) 0;max-width:1392px;margin:0 auto">
+    <dc-import name="SiteHeader" active="browse" hint-size="100%,68px"></dc-import>
+  </div>
+
+  <main style="max-width:1312px;margin:0 auto;padding:clamp(16px,2.5vw,28px) clamp(16px,3vw,32px) {{ padB }};display:flex;flex-direction:column;gap:clamp(20px,2.5vw,28px)">
+    <nav style="display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow:hidden;font:400 13px/18px var(--font-core);color:var(--text-tertiary)">
+      <a href="Browse.dc.html" style="flex:none;display:flex;align-items:center;gap:4px;min-height:32px"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiArrowLeft" size="{{ 14 }}" hint-size="14px,14px"></x-import>Browse exits</a>
+      <span style="flex:none">/</span><span style="flex:none">{{ L.community }}</span><span style="flex:none">/</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;color:var(--text-secondary)">{{ L.project }}</span>
+    </nav>
+
+    <section data-screen-label="Gallery" style="display:grid;grid-template-columns:{{ galCols }};grid-template-rows:{{ galRows }};gap:8px;border-radius:16px;overflow:hidden">
+      <div style="grid-row:span 2;position:relative;background:{{ L.tone }};background-image:repeating-linear-gradient(135deg,rgba(130,123,119,0.07) 0 1px,transparent 1px 12px)">
+        <img src="{{ L.art }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+        <div style="position:absolute;left:16px;top:16px;display:flex;gap:8px">
+          <span style="display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 10px 0 8px;border-radius:999px;background:rgba(255,255,255,0.94);color:var(--arvo-blue);font:600 13px/16px var(--font-core)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="ShieldFill" size="{{ 16 }}" hint-size="16px,16px"></x-import>Verified</span>
+          <span style="display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;background:var(--arvo-orange);color:#fff;font:600 14px/16px var(--font-brand)">{{ L.pill }}</span>
+        </div>
+      </div>
+      <div style="display:{{ tileDisplay }};position:relative;background:#E3DED6"><span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:500 11px/16px var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;color:var(--sand-5)">interior render</span></div>
+      <div style="display:{{ tileDisplay }};position:relative;background:#E8E4DD"><span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:500 11px/16px var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;color:var(--sand-5)">floor plan</span>
+        <span style="position:absolute;right:12px;bottom:12px"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="secondary" size="tiny" left-icon="FiMaximize2" hint-size="130px,28px">view all 12</x-import></span>
+      </div>
+    </section>
+
+    <div style="display:grid;grid-template-columns:{{ cols }};gap:clamp(28px,3vw,40px);align-items:start">
+      <div style="display:{{ leftDisplay }};flex-direction:column;gap:48px;min-width:0">
+        <section data-screen-label="Overview" style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <h1 style="margin:0;font:500 clamp(30px,4vw,44px)/1.18 var(--font-display);letter-spacing:-0.02em;color:var(--sand-1)">{{ L.project }}</h1>
+            <span style="font:400 16px/24px var(--font-core);color:var(--text-secondary)">{{ L.community }} · by {{ L.developer }}</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ specs }}" as="s" hint-placeholder-count="5">
+              <span style="display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px rgba(130,123,119,0.24);font:500 14px/20px var(--font-core);color:var(--text-secondary);white-space:nowrap"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="{{ s.icon }}" size="{{ 16 }}" hint-size="16px,16px"></x-import>{{ s.label }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Badge" color="sky" fill="lighter" size="medium" type="leftIcon" icon="ShieldFill" hint-size="80px,24px">verified</x-import>
+            <sc-for list="{{ L.badges }}" as="b" hint-placeholder-count="1">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Badge" color="gray" fill="lighter" size="medium" hint-size="120px,24px">{{ b }}</x-import>
+            </sc-for>
+          </div>
+        </section>
+
+        <section data-screen-label="Payment plan" style="order:{{ o2 }};display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+            <h2 style="margin:0;font:500 28px/36px var(--font-display);letter-spacing:-0.01em">Payment plan</h2>
+            <span style="font:400 14px/20px var(--font-core);color:var(--text-tertiary);white-space:nowrap">Contract price AED {{ L.f.orig }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;gap:2px;background:#fff">
+              <sc-for list="{{ planBar }}" as="b" hint-placeholder-count="3"><div style="width:{{ b.w }};background:{{ b.c }}"></div></sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:16px;font:400 12px/16px var(--font-core);color:var(--text-secondary)">
+              <sc-for list="{{ planBar }}" as="b" hint-placeholder-count="3"><span style="display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="width:8px;height:8px;border-radius:2px;background:{{ b.c }}"></span><span>{{ b.label }}</span></span></sc-for>
+            </div>
+          </div>
+          <div style="border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar);overflow:hidden">
+            <sc-for list="{{ plan }}" as="p" hint-placeholder-count="6">
+              <sc-if value="{{ p.header }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 20px;background:var(--arvo-chalk);font:600 12px/16px var(--font-core);letter-spacing:0.04em;text-transform:uppercase;color:var(--text-secondary)"><span>{{ p.label }}</span><span style="font-variant-numeric:tabular-nums;white-space:nowrap">{{ p.amount }}</span></div>
+              </sc-if>
+              <sc-if value="{{ p.row }}" hint-placeholder-val="{{ true }}">
+                <div style="display:grid;grid-template-columns:{{ rowCols }};gap:clamp(10px,2vw,16px);align-items:center;padding:14px clamp(14px,2.5vw,20px);border-top:1px solid rgba(130,123,119,0.12)">
+                  <span style="width:24px;height:24px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:{{ p.dotBg }};color:{{ p.dotFg }};box-shadow:inset 0 0 0 1px {{ p.dotRing }}"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="{{ p.icon }}" size="{{ 14 }}" hint-size="14px,14px"></x-import></span>
+                  <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                    <span style="font:500 14px/20px var(--font-core);color:var(--text-primary)">{{ p.label }}</span>
+                    <span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary)">{{ p.noteShown }}</span>
+                  </div>
+                  <span style="display:{{ dateDisplay }};font:400 13px/18px var(--font-core);color:var(--text-secondary);white-space:nowrap">{{ p.date }}</span>
+                  <span style="min-width:{{ amtMin }};text-align:right;font:600 16px/20px var(--font-brand);font-variant-numeric:tabular-nums;color:{{ p.amtColor }};white-space:nowrap">AED {{ p.amount }}</span>
+                </div>
+              </sc-if>
+            </sc-for>
+          </div>
+        </section>
+
+        <section data-screen-label="Verification" style="order:{{ o2 }};display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+            <h2 style="margin:0;font:500 28px/36px var(--font-display);letter-spacing:-0.01em">Verification</h2>
+            <span style="font:400 13px/18px var(--font-core);color:var(--text-tertiary);white-space:nowrap">Last verified on 14 Oct 2026</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:12px;background:#fff;box-shadow:var(--shadow-topbar)">
+                <span style="flex:none;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--state-verified-lighter-2);color:var(--arvo-blue)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="DoneFill" size="{{ 18 }}" hint-size="18px,18px"></x-import></span>
+                <div style="display:flex;flex-direction:column;gap:2px">
+                  <span style="font:600 14px/20px var(--font-core)">{{ c.title }}</span>
+                  <span style="font:400 13px/18px var(--font-core);color:var(--text-secondary)">{{ c.body }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section data-screen-label="Project" style="order:{{ o2 }};display:flex;flex-direction:column;gap:20px">
+          <h2 style="margin:0;font:500 28px/36px var(--font-display);letter-spacing:-0.01em">Project</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+            <div style="display:flex;flex-direction:column;gap:20px;padding:20px;border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar)">
+              <div style="display:flex;justify-content:space-between;gap:12px"><span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">Expected handover</span><span style="font:600 16px/20px var(--font-brand)">{{ L.handover }}</span></div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;gap:12px"><span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">Construction progress</span><span style="font:600 16px/20px var(--font-brand)">{{ L.construction }}%</span></div>
+                <div style="height:8px;border-radius:999px;background:var(--arvo-chalk);overflow:hidden"><div style="height:100%;width:{{ L.buildW }};background:var(--sand-3);border-radius:999px"></div></div>
+                <span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary)">Per RERA escrow report, Sep 2026</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">Amenities</span>
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <sc-for list="{{ amenities }}" as="a" hint-placeholder-count="6"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Tag" hint-size="70px,24px">{{ a }}</x-import></sc-for>
+                </div>
+              </div>
+            </div>
+            <div style="position:relative;min-height:260px;border-radius:16px;overflow:hidden;background:#ECE8E1;background-image:linear-gradient(rgba(130,123,119,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(130,123,119,0.08) 1px,transparent 1px);background-size:40px 40px;box-shadow:var(--shadow-topbar)">
+              <div style="position:absolute;left:-10%;top:62%;width:130%;height:3px;background:rgba(255,255,255,0.9);transform:rotate(-24deg)"></div>
+              <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;color:var(--arvo-orange)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="MapPinFill" size="{{ 32 }}" hint-size="32px,32px"></x-import></span>
+              <span style="position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.92);font:500 12px/16px var(--font-core);color:var(--text-secondary)">{{ L.community }}, Dubai</span>
+            </div>
+          </div>
+        </section>
+
+        <p style="order:{{ o2 }};margin:0;padding:16px 20px;border-radius:12px;background:var(--arvo-chalk);font:400 12px/18px var(--font-core);color:var(--text-tertiary);text-wrap:pretty">Figures are indicative and based on documents verified by Arvo Exit on the date shown. The exit is subject to the developer’s NOC, DLD requirements and final contract review. Market value estimates are based on recent comparable transactions and are not a valuation. Transfer fees are estimates and may change.</p>
+      </div>
+
+      <aside data-screen-label="Deal summary" style="order:{{ asideOrder }};position:{{ asidePos }};top:104px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:20px;padding:24px;border-radius:16px;background:#fff;box-shadow:var(--shadow-dome)">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <span style="font:600 18px/22px var(--font-brand);white-space:nowrap">Deal summary</span>
+            <span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary);white-space:nowrap">Listed {{ L.listed }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font:500 13px/16px var(--font-core);color:var(--text-tertiary)">Pay today, to seller</span>
+            <span style="display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums"><span style="font:600 20px/1 var(--font-brand);color:var(--text-secondary)">AED</span><span style="font:600 44px/1 var(--font-brand);letter-spacing:-0.01em;color:var(--sand-1)">{{ L.f.pay }}</span></span>
+            <span style="font:600 14px/20px var(--font-core);color:var(--green-800)">Below cost by AED {{ L.f.below }} · {{ L.f.belowPct }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-core);font-variant-numeric:tabular-nums">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:var(--text-secondary)">Seller has paid</span><span style="white-space:nowrap;color:var(--text-tertiary);text-decoration:line-through">AED {{ L.f.paid }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:var(--text-secondary)">Remaining to developer</span><span style="white-space:nowrap">AED {{ L.f.remaining }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid rgba(130,123,119,0.16)"><span style="color:var(--text-secondary)">Total cost to you</span><span style="white-space:nowrap;font-weight:600">AED {{ L.f.total }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:var(--text-secondary)">Original price</span><span style="white-space:nowrap;color:var(--text-tertiary)">AED {{ L.f.orig }}</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:12px;background:var(--green-green-5)">
+            <div style="display:flex;justify-content:space-between;gap:12px;font:400 13px/18px var(--font-core);color:var(--text-secondary)"><span>Est. market value</span><span style="white-space:nowrap;font-variant-numeric:tabular-nums">AED {{ L.f.market }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px;font:600 15px/20px var(--font-core);color:var(--green-800)"><span>Equity on day one</span><span style="white-space:nowrap;font-variant-numeric:tabular-nums">AED {{ L.f.equity }}</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <button onClick="{{ toggleFees }}" style="display:flex;justify-content:space-between;align-items:center;padding:0;border:none;background:none;cursor:pointer;font:600 14px/20px var(--font-core);color:var(--text-primary)">
+              <span>Estimated transfer costs</span>
+              <span style="display:flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums;white-space:nowrap"><span style="white-space:nowrap">AED {{ fees.total }}</span><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="{{ feesIcon }}" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>
+            </button>
+            <sc-if value="{{ feesOpen }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:8px;font:400 13px/18px var(--font-core);color:var(--text-secondary);font-variant-numeric:tabular-nums">
+                <div style="display:flex;justify-content:space-between;gap:12px"><span>Developer NOC fee</span><span style="white-space:nowrap">AED {{ fees.noc }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px"><span>DLD transfer fee (4%)</span><span style="white-space:nowrap">AED {{ fees.dld }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px"><span>Oqood registration & admin</span><span style="white-space:nowrap">AED {{ fees.oqood }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px"><span>Arvo Exit buyer fee (1%)</span><span style="white-space:nowrap">AED {{ fees.arvo }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:12px;padding-top:8px;border-top:1px dashed rgba(130,123,119,0.3);font-weight:600;color:var(--text-primary)"><span>Cash needed at transfer</span><span style="white-space:nowrap">AED {{ fees.cash }}</span></div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" full-width="{{ true }}" on-click="{{ openRequest }}" hint-size="100%,44px">request to buy</x-import>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:8px">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="secondary" left-icon="FiCalendar" full-width="{{ true }}" hint-size="100%,44px">schedule a call</x-import>
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="outlined" left-icon="FiHeart" on-click="{{ toggleSave }}" hint-size="100px,44px">{{ saveLabel }}</x-import>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:#fff;box-shadow:var(--shadow-topbar)">
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Avatar" size="{{ 36 }}" image="assets/images/case-manager.png" hint-size="36px,36px"></x-import>
+          <div style="display:flex;flex-direction:column">
+            <span style="font:600 14px/20px var(--font-core)">Omar Haddad, case manager</span>
+            <span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary)">Usually replies within 2 hours</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -1px 0 rgba(130,123,119,0.18)">
+      <div style="display:flex;flex-direction:column;gap:2px"><span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary);white-space:nowrap">Pay today · <span style="color:var(--green-800);font-weight:600">{{ L.f.belowPct }} below cost</span></span><span style="white-space:nowrap;font:600 22px/1 var(--font-brand);font-variant-numeric:tabular-nums">AED {{ L.f.pay }}</span></div>
+      <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" on-click="{{ openRequest }}" hint-size="150px,44px">request to buy</x-import>
+    </div>
+  </sc-if>
+  <sc-if value="{{ requestOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeRequest }}" style="position:fixed;inset:0;z-index:50;background:rgba(51,51,51,0.24);display:flex;align-items:center;justify-content:center;padding:24px">
+      <div onClick="{{ stop }}">
+        <x-import component-from-global-scope="ArvoDesignSystem_dcb547.StatusModal" status="success" title="Request sent" text="Omar will call you within one business day to confirm your funds and book the developer NOC." action="back to listing" width="{{ modalW }}" on-action="{{ closeRequest }}" hint-size="400px,300px"></x-import>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;listingId&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;10&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { feesOpen: true, saved: false, requestOpen: false, mob: window.innerWidth < 760 };
+  componentDidMount() {
+    if (!window.ArvoExit) this._t = setInterval(() => { if (window.ArvoExit) { clearInterval(this._t); this.forceUpdate(); } }, 50);
+    this._r = () => { const m = window.innerWidth < 760; if (m !== this.state.mob) this.setState({ mob: m }); }; window.addEventListener('resize', this._r); this._r();
+  }
+  componentWillUnmount() { clearInterval(this._t); window.removeEventListener('resize', this._r); }
+  buildPlan(L, fmt) {
+    const mon = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const d = (offset) => { const t = 2026 * 12 + 8 + offset; return mon[t % 12] + ' ' + Math.floor(t / 12); };
+    const amt = (p) => fmt(L.orig * p / 100);
+    const paidChunks = []; let left = L.pct; while (left > 0) { paidChunks.push(Math.min(10, left)); left -= 10; }
+    const rows = [{ header: true, label: 'Paid by seller', amount: 'AED ' + L.f.paid }];
+    paidChunks.forEach((p, i) => {
+      const back = (paidChunks.length - 1 - i) * 6;
+      rows.push({ row: true, icon: 'FiCheck', dotBg: 'var(--sand-2)', dotFg: '#fff', dotRing: 'var(--sand-2)', label: (i === 0 ? 'Booking' : 'Installment ' + (i + 1)) + ' · ' + p + '%', note: 'Paid · receipt verified', date: d(-back), amount: amt(p), amtColor: 'var(--text-tertiary)' });
+    });
+    const rem = 100 - L.pct; const php = L.php ? Math.min(30, rem - 10) : 0;
+    const hand = Math.min(40, rem - php); let constr = rem - php - hand;
+    rows.push({ header: true, label: 'Remaining to developer', amount: 'AED ' + L.f.remaining });
+    let k = 1;
+    while (constr > 0) { const p = Math.min(10, constr); rows.push({ row: true, icon: 'FiClock', dotBg: '#fff', dotFg: 'var(--text-secondary)', dotRing: 'var(--sand-7)', label: 'Installment · ' + p + '%', note: k === 1 ? 'Next due' : 'Construction-linked', date: d(3 + (k - 1) * 6), amount: amt(p), amtColor: 'var(--text-primary)' }); constr -= p; k++; }
+    rows.push({ row: true, icon: 'FiHome', dotBg: '#fff', dotFg: 'var(--text-secondary)', dotRing: 'var(--sand-7)', label: 'On handover · ' + hand + '%', note: 'Due at key handover', date: L.handover, amount: amt(hand), amtColor: 'var(--text-primary)' });
+    if (php) {
+      rows.push({ header: true, label: 'Post-handover', amount: 'AED ' + amt(php) });
+      rows.push({ row: true, icon: 'FiCalendar', dotBg: '#fff', dotFg: 'var(--text-secondary)', dotRing: 'var(--sand-7)', label: 'Post-handover plan · ' + php + '%', note: '8 quarterly payments of AED ' + fmt(L.orig * php / 800), date: 'After ' + L.handover, amount: amt(php), amtColor: 'var(--text-primary)' });
+    }
+    const bar = [{ w: L.pct + '%', c: 'var(--sand-2)', label: 'Paid ' + L.pct + '%' }, { w: (rem - php) + '%', c: 'var(--sand-6)', label: 'Before & on handover ' + (rem - php) + '%' }];
+    if (php) bar.push({ w: php + '%', c: 'var(--sand-7)', label: 'Post-handover ' + php + '%' });
+    return { rows, bar };
+  }
+  renderVals() {
+    const D = window.ArvoExit;
+    if (!D) return { L: { f: {}, badges: [] }, specs: [], plan: [], planBar: [], checks: [], amenities: [], fees: {} };
+    const id = parseInt(new URLSearchParams(window.location.search).get('id') || this.props.listingId || '1', 10);
+    const L = D.listings.find((l) => l.id === id) || D.listings[0];
+    const { rows, bar } = this.buildPlan(L, D.fmt);
+    const mob = this.state.mob;
+    const noc = 5250, dld = L.orig * 0.04, oqood = 1150, arvo = L.pay * 0.01;
+    return {
+      L, mob,
+      padB: mob ? '120px' : '96px', galCols: mob ? '1fr' : '2fr 1fr', galRows: mob ? '240px' : '220px 220px', tileDisplay: mob ? 'none' : 'block',
+      cols: mob ? 'minmax(0,1fr)' : 'minmax(0,1fr) 400px', leftDisplay: mob ? 'contents' : 'flex', o2: mob ? 2 : 0, asideOrder: mob ? 1 : 0, asidePos: mob ? 'static' : 'sticky',
+      rowCols: mob ? '24px minmax(0,1fr) auto' : '28px minmax(0,1fr) auto auto', dateDisplay: mob ? 'none' : 'inline', amtMin: mob ? '0' : '120px', modalW: mob ? 340 : 440,
+      specs: [{ icon: 'FiHome', label: L.type }, { icon: 'FiMaximize', label: L.f.sqft + ' sqft' }, { icon: 'FiLayers', label: L.view }, { icon: 'FiCalendar', label: 'Handover ' + L.handover }, { icon: 'FiTool', label: L.construction + '% built' }],
+      plan: rows.map((r) => ({ ...r, noteShown: mob && r.row ? r.date + ' · ' + r.note : r.note })), planBar: bar,
+      checks: [
+        { title: 'SPA verified', body: 'Price, unit and parties match the signed sale and purchase agreement.' },
+        { title: 'Developer statement of account', body: 'Amount paid and next due date confirmed with ' + L.developer + '.' },
+        { title: 'Payment receipts', body: 'Every installment matched to a bank receipt.' },
+        { title: 'Oqood registered', body: 'Unit registered with Dubai Land Department under the seller’s name.' },
+      ],
+      amenities: ['Pool', 'Gym', 'Kids’ play area', 'Park access', 'Retail podium', 'Covered parking'],
+      fees: { noc: D.fmt(noc), dld: D.fmt(dld), oqood: D.fmt(oqood), arvo: D.fmt(arvo), total: D.fmt(noc + dld + oqood + arvo), cash: D.fmt(L.pay + noc + dld + oqood + arvo) },
+      feesOpen: this.state.feesOpen, feesIcon: this.state.feesOpen ? 'FiChevronUp' : 'FiChevronDown',
+      toggleFees: () => this.setState({ feesOpen: !this.state.feesOpen }),
+      saveLabel: this.state.saved ? 'saved' : 'save', toggleSave: () => this.setState({ saved: !this.state.saved }),
+      requestOpen: this.state.requestOpen, openRequest: () => this.setState({ requestOpen: true }),
+      closeRequest: () => this.setState({ requestOpen: false }), stop: (e) => e.stopPropagation(),
+    };
+  }
+}
+</script>
+</body>
+</html>

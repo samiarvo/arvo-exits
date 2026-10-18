@@ -1,0 +1,116 @@
+/* Arvo — type scale.
+   The .fig defines no named Figma text styles (0 TEXT styles in the file), so
+   this scale is transcribed verbatim from the type actually set in the file.
+   Two voices: `--font-brand` (Blinker) for product chrome — buttons, balances,
+   nav, tags — and `--font-core`/`--font-display` (Inter / Inter Display) for
+   documentation, tables, forms and body copy. */
+:root {
+  /* Documentation + UI body — Inter */
+  --type-doc-title-font: var(--font-display);
+  --type-doc-title-size: 32px;
+  --type-doc-title-line: 40px;
+  --type-doc-title-tracking: -0.005em;
+  --type-doc-title-weight: 500;
+
+  --type-doc-lead-font: var(--font-core);
+  --type-doc-lead-size: 18px;
+  --type-doc-lead-line: 24px;
+  --type-doc-lead-tracking: -0.015em;
+  --type-doc-lead-weight: 400;
+
+  --type-eyebrow-font: var(--font-core);
+  --type-eyebrow-size: 16px;
+  --type-eyebrow-line: 24px;
+  --type-eyebrow-tracking: 0.06em;
+  --type-eyebrow-weight: 500;
+  --type-eyebrow-transform: uppercase;
+
+  --type-label-md-font: var(--font-core);
+  --type-label-md-size: 16px;
+  --type-label-md-line: 24px;
+  --type-label-md-weight: 500;
+
+  --type-label-sm-font: var(--font-core);
+  --type-label-sm-size: 14px;
+  --type-label-sm-line: 20px;
+  --type-label-sm-weight: 500;
+
+  --type-label-xs-font: var(--font-core);
+  --type-label-xs-size: 12px;
+  --type-label-xs-line: 16px;
+  --type-label-xs-weight: 500;
+
+  --type-label-2xs-font: var(--font-core);
+  --type-label-2xs-size: 11px;
+  --type-label-2xs-line: 12px;
+  --type-label-2xs-weight: 500;
+
+  --type-body-md-font: var(--font-core);
+  --type-body-md-size: 14px;
+  --type-body-md-line: 20px;
+  --type-body-md-weight: 400;
+
+  --type-body-sm-font: var(--font-core);
+  --type-body-sm-size: 12px;
+  --type-body-sm-line: 16px;
+  --type-body-sm-weight: 400;
+
+  /* Product chrome — Blinker */
+  --type-brand-display-font: var(--font-brand);
+  --type-brand-display-size: 36px;
+  --type-brand-display-line: 40px;
+  --type-brand-display-weight: 700;
+
+  --type-brand-title-font: var(--font-brand);
+  --type-brand-title-size: 30px;
+  --type-brand-title-line: 100%;
+  --type-brand-title-weight: 600;
+
+  --type-brand-amount-font: var(--font-brand);
+  --type-brand-amount-size: 24px;
+  --type-brand-amount-line: 100%;
+  --type-brand-amount-weight: 600;
+
+  --type-brand-lg-font: var(--font-brand);
+  --type-brand-lg-size: 20px;
+  --type-brand-lg-line: 24px;
+  --type-brand-lg-weight: 600;
+
+  --type-brand-md-font: var(--font-brand);
+  --type-brand-md-size: 16px;
+  --type-brand-md-line: 20px;
+  --type-brand-md-weight: 600;
+
+  --type-brand-body-font: var(--font-brand);
+  --type-brand-body-size: 16px;
+  --type-brand-body-line: 20px;
+  --type-brand-body-weight: 400;
+
+  --type-brand-sm-font: var(--font-brand);
+  --type-brand-sm-size: 14px;
+  --type-brand-sm-line: 16px;
+  --type-brand-sm-weight: 600;
+
+  --type-brand-xs-font: var(--font-brand);
+  --type-brand-xs-size: 12px;
+  --type-brand-xs-line: 16px;
+  --type-brand-xs-weight: 600;
+
+  --type-brand-2xs-font: var(--font-brand);
+  --type-brand-2xs-size: 10px;
+  --type-brand-2xs-line: 12px;
+  --type-brand-2xs-weight: 600;
+
+  --type-mono-font: var(--font-mono);
+  --type-mono-size: 14px;
+  --type-mono-line: 20px;
+  --type-mono-weight: 500;
+}
+.arvo-doc-title{font:var(--type-doc-title-weight) var(--type-doc-title-size)/var(--type-doc-title-line) var(--type-doc-title-font);letter-spacing:var(--type-doc-title-tracking);color:var(--text-strong-950-2)}
+.arvo-doc-lead{font:var(--type-doc-lead-weight) var(--type-doc-lead-size)/var(--type-doc-lead-line) var(--type-doc-lead-font);letter-spacing:var(--type-doc-lead-tracking);color:var(--neutral-gray-600)}
+.arvo-eyebrow{font:var(--type-eyebrow-weight) var(--type-eyebrow-size)/var(--type-eyebrow-line) var(--type-eyebrow-font);letter-spacing:var(--type-eyebrow-tracking);text-transform:uppercase;color:var(--neutral-gray-600)}
+.arvo-brand-title{font:var(--type-brand-title-weight) var(--type-brand-title-size)/var(--type-brand-title-line) var(--type-brand-title-font);color:var(--text-strong-950)}
+.arvo-brand-amount{font:var(--type-brand-amount-weight) var(--type-brand-amount-size)/var(--type-brand-amount-line) var(--type-brand-amount-font);color:var(--text-strong-950)}
+.arvo-brand-md{font:var(--type-brand-md-weight) var(--type-brand-md-size)/var(--type-brand-md-line) var(--type-brand-md-font);color:var(--text-strong-950)}
+.arvo-body-md{font:var(--type-body-md-weight) var(--type-body-md-size)/var(--type-body-md-line) var(--type-body-md-font);color:var(--text-sub-600)}
+.arvo-mono{font:var(--type-mono-weight) var(--type-mono-size)/var(--type-mono-line) var(--type-mono-font);color:var(--text-strong-950)}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/styles.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/brand.css">
+<style>body{margin:0;background:#ECE8E2;-webkit-font-smoothing:antialiased}a{color:var(--text-link);text-decoration:none}a:hover{color:var(--arvo-orange);text-decoration:underline}</style>
+</helmet>
+<section style="padding:48px 56px 80px;font-family:var(--font-core);color:var(--text-primary)">
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:36px;max-width:860px">
+    <span style="font:600 30px/1 var(--font-brand)">Arvo Exit · Mobile preview (390px)</span>
+    <span style="font:400 15px/22px var(--font-core);color:var(--text-secondary);text-wrap:pretty">These are the live, responsive pages at phone width, the same files you deploy. Below 760px the header collapses to a menu, filters open as a bottom sheet, the listing page gets a sticky “Request to buy” bar, and sidebars stack under the main content.</span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:48px 40px;align-items:flex-start">
+    <sc-for list="{{ frames }}" as="fr" hint-placeholder-count="6">
+      <div id="{{ fr.id }}" style="display:flex;flex-direction:column;gap:12px">
+        <span style="display:flex;align-items:center;gap:8px;font:500 13px/16px var(--font-core);color:var(--text-secondary)"><span style="font:600 11px/1 var(--font-mono);padding:4px 7px;border-radius:5px;background:var(--sand-2);color:#fff">{{ fr.id }}</span>{{ fr.label }}<a href="{{ fr.src }}" style="margin-left:auto;font-size:12px">Open</a></span>
+        <div data-screen-label="{{ fr.label }}" style="width:390px;height:844px;border-radius:44px;overflow:hidden;background:#FAF8F5;box-shadow:var(--shadow-dome),0 0 0 10px #1E1C1B">
+          <iframe src="{{ fr.src }}" title="{{ fr.label }}" loading="lazy" style="width:390px;height:844px;border:0;display:block"></iframe>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      frames: [
+        { id: 'M1', label: 'Landing', src: 'Landing.dc.html' },
+        { id: 'M2', label: 'Browse exits', src: 'Browse.dc.html' },
+        { id: 'M3', label: 'Listing detail', src: 'Listing Detail.dc.html?id=1' },
+        { id: 'M4', label: 'Sell · validation error', src: 'Sell Wizard.dc.html?start=error' },
+        { id: 'M5', label: 'Sell · exit value', src: 'Sell Wizard.dc.html?start=2' },
+        { id: 'M6', label: 'Buyer matches', src: 'Buyer Match.dc.html?start=results' },
+        { id: 'M7', label: 'Seller dashboard', src: 'Dashboard.dc.html' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

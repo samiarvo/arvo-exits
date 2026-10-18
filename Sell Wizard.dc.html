@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/styles.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/brand.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/elevation.css">
+<script src="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/_ds_bundle.js"></script>
+<script src="data.js"></script>
+<style>body{margin:0;background:#FAF8F5;color:var(--text-primary);-webkit-font-smoothing:antialiased}a{color:var(--text-link);text-decoration:none}a:hover{color:var(--arvo-orange);text-decoration:underline}</style>
+</helmet>
+<div style="min-height:100vh;background:#FAF8F5;font-family:var(--font-core);color:var(--text-primary)">
+  <div style="position:sticky;top:0;z-index:30;padding:clamp(8px,1.5vw,16px) clamp(8px,2vw,24px) 0;max-width:1392px;margin:0 auto">
+    <dc-import name="SiteHeader" active="sell" hint-size="100%,68px"></dc-import>
+  </div>
+
+  <main style="max-width:1120px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,3vw,32px) 96px;display:flex;flex-direction:column;gap:28px">
+    <sc-if value="{{ inWizard }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font:500 13px/16px var(--font-core);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary)">Get my exit value</span>
+          <h1 style="margin:0;font:500 clamp(30px,4vw,40px)/1.2 var(--font-display);letter-spacing:-0.02em;color:var(--sand-1)">{{ stepTitle }}</h1>
+        </div>
+        <div style="white-space:nowrap;max-width:100%;overflow-x:auto;scrollbar-width:none"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Steps" items="{{ stepItems }}" value="{{ stepIdx }}" hint-size="320px,20px"></x-import></div>
+      </div>
+    </sc-if>
+
+    <div style="display:grid;grid-template-columns:{{ cols }};gap:24px;align-items:start">
+      <div style="display:flex;flex-direction:column;min-width:0">
+
+        <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+          <section data-screen-label="Sell step 1" style="display:flex;flex-direction:column;gap:24px;padding:clamp(20px,3vw,32px);border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar)">
+            <sc-if value="{{ hasErrors }}" hint-placeholder-val="{{ false }}">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Alert" status="error" size="small" dismissable="{{ false }}" hint-size="100%,40px">Check the highlighted fields before you continue.</x-import>
+            </sc-if>
+            <div style="display:flex;flex-direction:column;gap:8px;position:relative">
+              <label style="font:600 13px/16px var(--font-core)">Project or building</label>
+              <div style="position:relative">
+                <span style="position:absolute;left:14px;top:14px;color:var(--text-tertiary);display:flex"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiSearch" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>
+                <input value="{{ f.project }}" onChange="{{ onProject }}" onFocus="{{ openSuggest }}" placeholder="Start typing a project name" style="box-sizing:border-box;width:100%;height:44px;padding:0 14px 0 40px;border:none;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px {{ ring.project }};font:400 16px/22px var(--font-core);color:var(--text-primary);outline:none">
+              </div>
+              <sc-if value="{{ suggestOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;left:0;right:0;top:76px;z-index:5;padding:6px;border-radius:12px;background:#fff;box-shadow:var(--shadow-card);display:flex;flex-direction:column">
+                  <sc-for list="{{ suggestions }}" as="o" hint-placeholder-count="4">
+                    <button onClick="{{ o.pick }}" style="display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border:none;border-radius:8px;background:transparent;cursor:pointer;text-align:left;font:400 14px/20px var(--font-core);color:var(--text-primary)" style-hover="background:var(--arvo-chalk)">
+                      <span><span style="font-weight:600">{{ o.project }}</span> · {{ o.community }}</span><span style="color:var(--text-tertiary)">{{ o.developer }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ err.project }}" hint-placeholder-val="{{ false }}"><span style="font:400 13px/18px var(--font-core);color:var(--text-error)">{{ err.project }}</span></sc-if>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font:600 13px/16px var(--font-core)">Unit number</label>
+                <input value="{{ f.unit }}" onChange="{{ on.unit }}" placeholder="e.g. 1407" style="box-sizing:border-box;width:100%;height:44px;padding:0 14px;border:none;border-radius:10px;box-shadow:inset 0 0 0 1px {{ ring.unit }};font:400 16px/22px var(--font-core);outline:none">
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font:600 13px/16px var(--font-core)">Original price</label>
+                <div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:10px;box-shadow:inset 0 0 0 1px {{ ring.orig }}">
+                  <span style="font:500 14px/20px var(--font-core);color:var(--text-tertiary)">AED</span>
+                  <input value="{{ f.orig }}" onChange="{{ on.orig }}" inputmode="numeric" placeholder="1,850,000" style="flex:1;min-width:0;border:none;outline:none;background:none;font:600 16px/20px var(--font-brand);font-variant-numeric:tabular-nums">
+                </div>
+                <span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary)">The purchase price on your SPA</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font:600 13px/16px var(--font-core)">Amount paid so far</label>
+                <div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:10px;box-shadow:inset 0 0 0 1px {{ ring.paid }}">
+                  <span style="font:500 14px/20px var(--font-core);color:var(--text-tertiary)">AED</span>
+                  <input value="{{ f.paid }}" onChange="{{ on.paid }}" inputmode="numeric" placeholder="555,000" style="flex:1;min-width:0;border:none;outline:none;background:none;font:600 16px/20px var(--font-brand);font-variant-numeric:tabular-nums">
+                </div>
+                <sc-if value="{{ err.paid }}" hint-placeholder-val="{{ false }}"><span style="display:flex;gap:6px;align-items:flex-start;font:400 13px/18px var(--font-core);color:var(--text-error)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="ErrorFill" size="{{ 16 }}" hint-size="16px,16px"></x-import>{{ err.paid }}</span></sc-if>
+                <sc-if value="{{ noErrPaid }}" hint-placeholder-val="{{ true }}"><span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary)">As shown on your developer statement of account</span></sc-if>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font:600 13px/16px var(--font-core)">Next installment date</label>
+                <input type="date" value="{{ f.next }}" onChange="{{ on.next }}" style="box-sizing:border-box;width:100%;height:44px;padding:0 14px;border:none;border-radius:10px;box-shadow:inset 0 0 0 1px {{ ring.next }};font:400 16px/22px var(--font-core);color:var(--text-primary);outline:none;background:#fff">
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-top:8px;border-top:1px solid rgba(130,123,119,0.16)">
+              <span style="display:flex;align-items:center;gap:6px;font:400 13px/18px var(--font-core);color:var(--text-tertiary)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiLock" size="{{ 14 }}" hint-size="14px,14px"></x-import>Nothing is shared until you choose to list.</span>
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" right-icon="FiArrowRight" on-click="{{ submit1 }}" hint-size="180px,44px">see my exit value</x-import>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="Sell step 2" style="display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;flex-direction:column;gap:20px;padding:clamp(20px,3vw,32px);border-radius:16px;background:#fff;box-shadow:var(--shadow-dome)">
+              <div style="display:flex;justify-content:space-between;gap:4px 12px;flex-wrap:wrap">
+                <span style="font:400 14px/20px var(--font-core);color:var(--text-secondary);white-space:nowrap">{{ f.project }} · Unit {{ f.unit }}</span>
+                <span style="font:400 13px/18px var(--font-core);color:var(--text-tertiary)">Based on 14 recent exits in {{ community }}</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font:500 15px/20px var(--font-core);color:var(--text-secondary)">Your exit range</span>
+                <span style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-variant-numeric:tabular-nums"><span style="font:600 24px/1 var(--font-brand);color:var(--text-secondary)">AED</span><span style="font:600 clamp(28px,5vw,56px)/1.05 var(--font-brand);letter-spacing:-0.01em;color:var(--sand-1);white-space:nowrap">{{ r.lo }} – {{ r.hi }}</span></span>
+                <span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">That’s {{ r.loPct }}–{{ r.hiPct }} of the AED {{ r.paid }} you’ve paid, returned to you at transfer.</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;padding-top:8px">
+                <div style="position:relative;height:14px;border-radius:999px;background:var(--arvo-chalk)">
+                  <div style="position:absolute;top:0;bottom:0;left:{{ r.loW }};width:{{ r.rangeW }};border-radius:999px;background:var(--green-green-1)"></div>
+                  <div style="position:absolute;top:-6px;bottom:-6px;right:0;width:2px;background:var(--sand-2)"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;font:400 12px/16px var(--font-core);color:var(--text-tertiary)"><span style="white-space:nowrap">AED 0</span><span style="color:var(--text-primary);font-weight:600;white-space:nowrap">Cap: AED {{ r.paid }} paid</span></div>
+              </div>
+            </div>
+            <div style="display:flex;gap:16px;align-items:flex-start;padding:20px 24px;border-radius:16px;background:#F3F0EB;box-shadow:inset 0 0 0 1px rgba(130,123,119,0.16)">
+              <span style="flex:none;width:36px;height:36px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--text-secondary)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiAlertTriangle" size="{{ 18 }}" hint-size="18px,18px"></x-import></span>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font:400 15px/22px var(--font-core);color:var(--text-secondary)">If you cancel with the developer, you may forfeit up to <span style="font-weight:600;color:var(--text-primary)">AED {{ r.forfeit }}</span>.</span>
+                <span style="font:400 13px/18px var(--font-core);color:var(--text-tertiary)">Retention depends on construction progress and your SPA terms.</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar)">
+              <span style="font:600 18px/22px var(--font-brand)">How do you want to exit?</span>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+                <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
+                  <button onClick="{{ m.pick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:18px;border:none;border-radius:12px;background:{{ m.bg }};box-shadow:inset 0 0 0 {{ m.ringW }} {{ m.ring }};cursor:pointer;text-align:left;font-family:var(--font-core)">
+                    <span style="display:flex;align-items:center;justify-content:space-between;width:100%">
+                      <span style="display:flex;align-items:center;gap:8px;font:600 16px/20px var(--font-brand);color:var(--text-primary)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="{{ m.icon }}" size="{{ 18 }}" hint-size="18px,18px"></x-import>{{ m.title }}</span>
+                      <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Radio" checked="{{ m.on }}" hint-size="20px,20px"></x-import>
+                    </span>
+                    <span style="font:400 13px/19px var(--font-core);color:var(--text-secondary);text-wrap:pretty">{{ m.body }}</span>
+                    <span style="font:500 12px/16px var(--font-core);color:var(--text-tertiary)">{{ m.meta }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:12px">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="ghost" left-icon="FiArrowLeft" on-click="{{ back }}" hint-size="100px,44px">back</x-import>
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" right-icon="FiArrowRight" on-click="{{ next }}" hint-size="200px,44px">continue to documents</x-import>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="Sell step 3" style="display:flex;flex-direction:column;gap:20px;padding:clamp(20px,3vw,32px);border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar)">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="font:600 18px/22px var(--font-brand)">Documents</span>
+              <span style="font:400 14px/20px var(--font-core);color:var(--text-secondary)">PDF or photo, up to 20 MB each. Encrypted and only seen by your case manager.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(130,123,119,0.2);overflow:hidden">
+              <sc-for list="{{ docs }}" as="d" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-top:1px solid rgba(130,123,119,0.12)">
+                  <span style="flex:none;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:{{ d.iconBg }};color:{{ d.iconFg }}"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="{{ d.icon }}" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0">
+                    <span style="font:600 14px/20px var(--font-core)">{{ d.title }}</span>
+                    <span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ d.meta }}</span>
+                  </div>
+                  <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="{{ d.btnType }}" size="tiny" left-icon="{{ d.btnIcon }}" on-click="{{ d.toggle }}" hint-size="90px,28px">{{ d.btn }}</x-import>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;padding-top:4px">
+              <sc-for list="{{ consents }}" as="c" hint-placeholder-count="3">
+                <x-import component-from-global-scope="ArvoDesignSystem_dcb547.CheckboxLabel" checked="{{ c.on }}" on-change="{{ c.toggle }}" label="{{ c.label }}" hint-size="100%,24px"></x-import>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-top:12px;border-top:1px solid rgba(130,123,119,0.16)">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="ghost" left-icon="FiArrowLeft" on-click="{{ back }}" hint-size="100px,44px">back</x-import>
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+                <sc-if value="{{ blocked }}" hint-placeholder-val="{{ true }}"><span style="font:400 13px/18px var(--font-core);color:var(--text-tertiary)">{{ blockedMsg }}</span></sc-if>
+                <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" disabled="{{ blocked }}" on-click="{{ next }}" hint-size="160px,44px">submit for review</x-import>
+              </div>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="Sell confirmation" style="display:flex;flex-direction:column;gap:24px;padding:clamp(24px,4vw,40px);border-radius:16px;background:#fff;box-shadow:var(--shadow-dome)">
+            <span style="width:56px;height:56px;border-radius:999px;background:var(--green-green-5);display:flex;align-items:center;justify-content:center;color:var(--green-800)"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="DoneFill" size="{{ 28 }}" hint-size="28px,28px"></x-import></span>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <h1 style="margin:0;font:500 clamp(30px,4vw,40px)/1.2 var(--font-display);letter-spacing:-0.02em;color:var(--sand-1)">Your exit is submitted</h1>
+              <span style="font:400 16px/24px var(--font-core);color:var(--text-secondary)">Case AE-2026-04817 · {{ f.project }}, unit {{ f.unit }} · {{ modeLabel }}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:20px;border-radius:16px;background:var(--arvo-chalk)">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Avatar" size="{{ 56 }}" image="assets/images/case-manager.png" bottom-status="online" hint-size="56px,56px"></x-import>
+              <div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:200px">
+                <span style="font:500 12px/16px var(--font-core);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary)">Your case manager</span>
+                <span style="font:600 20px/24px var(--font-brand)">Omar Haddad</span>
+                <span style="font:400 13px/18px var(--font-core);color:var(--text-secondary)">11 years in Dubai off-plan transfers · English, Arabic</span>
+              </div>
+              <div style="display:flex;gap:8px">
+                <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="secondary" size="small" left-icon="FiMessageCircle" hint-size="120px,36px">whatsapp</x-import>
+                <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="secondary" size="small" left-icon="FiCalendar" hint-size="130px,36px">book a call</x-import>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+              <div style="display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(130,123,119,0.2)"><span style="font:600 14px/20px var(--font-core)">Verification</span><span style="font:400 13px/18px var(--font-core);color:var(--text-secondary)">2–3 working days. Omar checks every figure with {{ developer }}.</span></div>
+              <div style="display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(130,123,119,0.2)"><span style="font:600 14px/20px var(--font-core)">Your exit price</span><span style="font:400 13px/18px var(--font-core);color:var(--text-secondary)">You confirm a final figure within your range before anything goes live.</span></div>
+              <div style="display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(130,123,119,0.2)"><span style="font:600 14px/20px var(--font-core)">Keep paying</span><span style="font:400 13px/18px var(--font-core);color:var(--text-secondary)">Stay current on installments until transfer so nothing is forfeited.</span></div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="primary" on-click="{{ goDash }}" hint-size="160px,44px">track my exit</x-import>
+              <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Button" type="ghost" on-click="{{ restart }}" hint-size="140px,44px">start another</x-import>
+            </div>
+          </section>
+        </sc-if>
+      </div>
+
+      <aside style="display:flex;flex-direction:column;gap:12px;position:{{ asidePos }};top:104px">
+        <div style="display:flex;flex-direction:column;gap:16px;padding:24px;border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar)">
+          <span style="font:600 16px/20px var(--font-brand)">The Arvo Exit Standard</span>
+          <sc-for list="{{ promises }}" as="p" hint-placeholder-count="3">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <span style="flex:none;margin-top:2px;color:var(--arvo-blue);display:flex"><x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="DoneFill" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font:600 14px/20px var(--font-core)">{{ p.t }}</span><span style="font:400 13px/18px var(--font-core);color:var(--text-secondary)">{{ p.b }}</span></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:16px;border-radius:16px;background:#fff;box-shadow:var(--shadow-topbar)">
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Avatar" size="{{ 40 }}" image="assets/images/case-manager.png" hint-size="40px,40px"></x-import>
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font:600 14px/20px var(--font-core)">Prefer to talk first?</span><span style="font:400 13px/18px var(--font-core);color:var(--text-link);white-space:nowrap">Call +971 4 000 0000</span></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startAt&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Step 1&quot;,&quot;Step 1 – error&quot;,&quot;Step 2&quot;,&quot;Step 3&quot;,&quot;Confirmation&quot;],&quot;default&quot;:&quot;Step 1&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = this.initState(p);
+  }
+  initState(p) {
+    const q = new URLSearchParams(window.location.search).get('start');
+    const start = ({ error: 'Step 1 – error', '1': 'Step 1', '2': 'Step 2', '3': 'Step 3', done: 'Confirmation' })[q] || (p && p.startAt) || 'Step 1';
+    const map = { 'Step 1': 1, 'Step 1 – error': 1, 'Step 2': 2, 'Step 3': 3, 'Confirmation': 4 };
+    const errDemo = start === 'Step 1 – error';
+    return {
+      mob: window.innerWidth < 760,
+      step: map[start] || 1, suggest: false, mode: 0, tried: errDemo,
+      f: { project: 'Hillside Park Residences', community: 'Dubai Hills Estate', developer: 'Halcyon Developments', unit: '1407', orig: '1,850,000', paid: errDemo ? '2,100,000' : '555,000', next: '2026-12-15' },
+      docs: [true, true, true, false], consents: [false, false, false],
+    };
+  }
+  componentDidUpdate(prev) {
+    if (prev.startAt !== this.props.startAt) { this.setState(this.initState(this.props)); }
+  }
+  componentDidMount() {
+    if (!window.ArvoExit) this._t = setInterval(() => { if (window.ArvoExit) { clearInterval(this._t); this.forceUpdate(); } }, 50);
+    this._r = () => { const m = window.innerWidth < 760; if (m !== this.state.mob) this.setState({ mob: m }); }; window.addEventListener('resize', this._r); this._r();
+  }
+  componentWillUnmount() { clearInterval(this._t); window.removeEventListener('resize', this._r); }
+  renderVals() {
+    const D = window.ArvoExit || { listings: [], fmt: (n) => n };
+    const s = this.state, f = s.f;
+    const num = (v) => { const n = parseInt(String(v).replace(/[^0-9]/g, ''), 10); return isNaN(n) ? 0 : n; };
+    const orig = num(f.orig), paid = num(f.paid);
+    const err = {};
+    if (s.tried) {
+      if (!f.project.trim()) err.project = 'Choose your project from the list.';
+      if (!paid) err.paid = 'Enter the amount you’ve paid so far.';
+      else if (orig && paid > orig) err.paid = 'Amount paid can’t be more than the original price of AED ' + D.fmt(orig) + '.';
+    }
+    const ringFor = (k, empty) => (err[k] || (s.tried && empty) ? 'var(--red-500)' : 'var(--sand-7)');
+    const setF = (k, fmtNum) => (e) => { let v = e.target.value; if (fmtNum) { const n = num(v); v = n ? D.fmt(n) : ''; } this.setState({ f: { ...s.f, [k]: v } }); };
+    const round5 = (n) => Math.round(n / 5000) * 5000;
+    const lo = round5(paid * 0.91), hi = Math.min(paid, round5(paid * 0.973));
+    const q = f.project.toLowerCase();
+    const sugg = D.listings.filter((l, i, a) => a.findIndex((x) => x.project === l.project) === i && (!q || l.project.toLowerCase().includes(q) || l.community.toLowerCase().includes(q))).slice(0, 5);
+    const docDefs = [['Sale and purchase agreement (SPA)', 'SPA_Hillside_1407.pdf · 2.4 MB'], ['Developer statement of account', 'SOA_Oct2026.pdf · 410 KB'], ['Payment receipts', '3 files · 1.1 MB'], ['Emirates ID', 'Front and back']];
+    const consentDefs = ['I am the buyer named on the SPA, or authorised to act for them.', 'Arvo Exit may verify these documents with ' + f.developer + ' and Dubai Land Department.', 'I understand my exit price cannot be more than the amount I have paid.'];
+    const missingDocs = s.docs.filter((d) => !d).length, missingConsents = s.consents.filter((c) => !c).length;
+    const blocked = missingDocs > 0 || missingConsents > 0;
+    return {
+      cols: s.mob ? 'minmax(0,1fr)' : 'minmax(0,1fr) 320px', asidePos: s.mob ? 'static' : 'sticky',
+      inWizard: s.step < 4, s1: s.step === 1, s2: s.step === 2, s3: s.step === 3, s4: s.step === 4,
+      stepItems: ['Your unit', 'Exit value', 'Documents'], stepIdx: Math.min(s.step - 1, 2),
+      stepTitle: ['Tell us about your unit', 'Your exit value', 'Upload your documents'][Math.min(s.step - 1, 2)],
+      f, community: f.community, developer: f.developer,
+      onProject: (e) => this.setState({ f: { ...s.f, project: e.target.value }, suggest: true }),
+      openSuggest: () => this.setState({ suggest: true }), suggestOpen: s.suggest && sugg.length > 0,
+      suggestions: sugg.map((l) => ({ project: l.project, community: l.community, developer: l.developer, pick: () => this.setState({ suggest: false, f: { ...s.f, project: l.project, community: l.community, developer: l.developer } }) })),
+      on: { unit: setF('unit'), orig: setF('orig', true), paid: setF('paid', true), next: setF('next') },
+      err, hasErrors: Object.keys(err).length > 0, noErrPaid: !err.paid,
+      ring: { project: ringFor('project', !f.project), unit: ringFor('unit', !f.unit), orig: ringFor('orig', !orig), paid: ringFor('paid', !paid), next: ringFor('next', !f.next) },
+      submit1: () => {
+        const ok = f.project.trim() && paid && (!orig || paid <= orig) && f.unit && orig && f.next;
+        if (ok) this.setState({ step: 2, tried: false, suggest: false }); else this.setState({ tried: true, suggest: false });
+      },
+      r: { lo: D.fmt(lo), hi: D.fmt(hi), paid: D.fmt(paid), loPct: Math.round(lo / paid * 100) + '%', hiPct: Math.round(hi / paid * 100) + '%', forfeit: D.fmt(orig * 0.25), loW: (lo / paid * 100) + '%', rangeW: ((hi - lo) / paid * 100) + '%' },
+      modes: [
+        { icon: 'FiGlobe', title: 'Public listing', body: 'Shown to every buyer on Arvo Exit with verified figures. Usually the fastest route.', meta: 'Average 12 days to first offer' },
+        { icon: 'FiLock', title: 'Private exit', body: 'Matched buyers only. Your unit never appears in search or on the map.', meta: '3 registered buyers match this unit now' },
+      ].map((m, i) => ({ ...m, on: s.mode === i, pick: () => this.setState({ mode: i }), bg: s.mode === i ? '#fff' : 'var(--surface-card-medium)', ring: s.mode === i ? 'var(--sand-2)' : 'var(--sand-7)', ringW: s.mode === i ? '2px' : '1px' })),
+      modeLabel: s.mode === 0 ? 'Public listing' : 'Private exit',
+      docs: docDefs.map(([title, meta], i) => {
+        const up = s.docs[i];
+        return { title, meta: up ? meta : 'Not uploaded yet', icon: up ? 'FileFill' : 'FiUploadCloud', iconBg: up ? 'var(--state-verified-lighter-2)' : 'var(--arvo-chalk)', iconFg: up ? 'var(--arvo-blue)' : 'var(--text-tertiary)', btn: up ? 'replace' : 'upload', btnType: up ? 'ghost' : 'secondary', btnIcon: up ? 'FiRefreshCcw' : 'FiUpload', toggle: () => { const d = [...s.docs]; d[i] = true; this.setState({ docs: d }); } };
+      }),
+      consents: consentDefs.map((label, i) => ({ label, on: s.consents[i], toggle: () => { const c = [...s.consents]; c[i] = !c[i]; this.setState({ consents: c }); } })),
+      blocked, blockedMsg: missingDocs ? missingDocs + ' document still needed' : 'Confirm all three statements',
+      back: () => this.setState({ step: Math.max(1, s.step - 1) }),
+      next: () => { if (s.step === 3 && blocked) return; this.setState({ step: s.step + 1 }); },
+      restart: () => this.setState({ step: 1 }),
+      goDash: () => { window.location.href = 'Dashboard.dc.html'; },
+      promises: [{ t: 'Free for sellers', b: 'No listing fee, no commission.' }, { t: 'No premium allowed', b: 'Your exit price is capped at what you’ve paid.' }, { t: 'Handled end to end', b: 'Developer NOC and DLD transfer included.' }],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/styles.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/brand.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/elevation.css">
+<script src="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/_ds_bundle.js"></script>
+</helmet>
+<article onClick="{{ open }}" style="box-sizing:border-box;display:flex;flex-direction:column;gap:0;height:100%;padding:8px;border-radius:16px;background:var(--surface-card);box-shadow:var(--shadow-topbar);cursor:pointer;font-family:var(--font-core);color:var(--text-primary);transition:box-shadow 180ms cubic-bezier(.2,0,.2,1)" style-hover="box-shadow:var(--shadow-dome)">
+  <div style="position:relative;height:188px;border-radius:12px;overflow:hidden;background:{{ L.tone }};background-image:repeating-linear-gradient(135deg,rgba(130,123,119,0.07) 0 1px,transparent 1px 12px)">
+    <img src="{{ L.art }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;left:10px;top:10px;display:flex;gap:6px">
+      <span style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px 0 6px;border-radius:999px;background:rgba(255,255,255,0.94);color:var(--arvo-blue);font:600 12px/16px var(--font-core)">
+        <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="ShieldFill" size="{{ 14 }}" hint-size="14px,14px"></x-import>Verified
+      </span>
+      <sc-if value="{{ L.priv }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px 0 6px;border-radius:999px;background:var(--sand-2);color:#fff;font:600 12px/16px var(--font-core)">
+          <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiLock" size="{{ 12 }}" hint-size="12px,12px"></x-import>Private exit
+        </span>
+      </sc-if>
+    </div>
+    <button onClick="{{ toggleSave }}" aria-label="Save" style="position:absolute;right:10px;top:10px;width:32px;height:32px;border:none;border-radius:999px;background:rgba(255,255,255,0.94);display:flex;align-items:center;justify-content:center;cursor:pointer;color:{{ heartColor }}">
+      <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiHeart" size="{{ 16 }}" hint-size="16px,16px"></x-import>
+    </button>
+    <sc-if value="{{ discounted }}" hint-placeholder-val="{{ true }}">
+      <span style="position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:var(--arvo-orange);color:#fff;font:600 14px/16px var(--font-brand)">{{ L.pill }}</span>
+    </sc-if>
+    <sc-if value="{{ L.atCost }}" hint-placeholder-val="{{ false }}">
+      <span style="position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:#fff;color:var(--text-primary);box-shadow:inset 0 0 0 1px var(--sand-7);font:600 14px/16px var(--font-brand)">At cost</span>
+    </sc-if>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;padding:14px 8px 8px;flex:1">
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <span style="font:600 18px/22px var(--font-brand);color:var(--text-primary)">{{ L.project }}</span>
+      <span style="font:400 13px/18px var(--font-core);color:var(--text-tertiary)">{{ L.community }} · {{ L.developer }}</span>
+      <span style="font:400 13px/18px var(--font-core);color:var(--text-secondary)">{{ L.type }} · {{ L.f.sqft }} sqft · {{ L.view }}</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:1px solid rgba(130,123,119,0.18)">
+      <span style="font:500 12px/16px var(--font-core);color:var(--text-tertiary)">Pay today</span>
+      <span style="display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums"><span style="font:600 15px/1 var(--font-brand);color:var(--text-secondary)">AED</span><span style="font:600 30px/1 var(--font-brand);color:var(--text-primary);letter-spacing:-0.01em">{{ L.f.pay }}</span></span>
+      <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:400 13px/18px var(--font-core)">
+        <span style="color:var(--text-tertiary);white-space:nowrap">Seller paid <span style="text-decoration:line-through;font-variant-numeric:tabular-nums">AED {{ L.f.paid }}</span></span>
+        <sc-if value="{{ discounted }}" hint-placeholder-val="{{ true }}"><span style="color:var(--green-800);font-weight:600;white-space:nowrap">Save AED {{ L.f.below }}</span></sc-if>
+      </span>
+      <span style="font:400 12px/16px var(--font-core);color:var(--text-tertiary);font-variant-numeric:tabular-nums">Original AED {{ L.f.orig }} · Remaining AED {{ L.f.remaining }}</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:auto">
+      <div style="display:flex;justify-content:space-between;font:500 12px/16px var(--font-core);color:var(--text-secondary)">
+        <span style="white-space:nowrap">{{ L.pct }}% paid</span><span style="white-space:nowrap">Handover {{ L.handover }}</span>
+      </div>
+      <div style="height:6px;border-radius:999px;background:var(--arvo-chalk);box-shadow:inset 0 0 0 1px rgba(130,123,119,0.14);overflow:hidden">
+        <div style="height:100%;width:{{ L.paidW }};border-radius:999px;background:var(--sand-3)"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;font:400 12px/16px var(--font-core);color:var(--text-tertiary)">
+        <span style="white-space:nowrap">Construction {{ L.construction }}%</span>
+        <sc-for list="{{ L.badges }}" as="b" hint-placeholder-count="0">
+          <span style="font:500 11px/12px var(--font-core);letter-spacing:0.02em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--arvo-chalk);color:var(--text-secondary);white-space:nowrap">{{ b }}</span>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</article>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:340,&quot;height&quot;:500},&quot;listing&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;},&quot;saved&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { saved: null };
+  renderVals() {
+    const L = this.props.listing || { f: {}, badges: [] };
+    const saved = this.state.saved ?? !!this.props.saved;
+    return {
+      L,
+      discounted: !L.atCost,
+      heartColor: saved ? 'var(--arvo-orange)' : 'var(--text-secondary)',
+      toggleSave: (e) => { e.stopPropagation(); this.setState({ saved: !saved }); },
+      open: () => { if (L.href) window.location.href = L.href; },
+    };
+  }
+}
+</script>
+</body>
+</html>

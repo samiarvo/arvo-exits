@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/styles.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/brand.css">
+<link rel="stylesheet" href="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/tokens/elevation.css">
+<script src="_ds/arvo-design-system-dcb547fb-98d7-4655-a9ab-f2dbb42f4f3e/_ds_bundle.js"></script>
+</helmet>
+<article onClick="{{ open }}" style="box-sizing:border-box;display:flex;flex-direction:column;gap:0;height:100%;padding:8px;border-radius:16px;background:var(--surface-card);box-shadow:var(--shadow-topbar);cursor:pointer;font-family:var(--font-core);color:var(--text-primary);transition:box-shadow 180ms cubic-bezier(.2,0,.2,1)" style-hover="box-shadow:var(--shadow-dome)">
+  <div style="position:relative;height:188px;border-radius:12px;overflow:hidden;background:{{ L.tone }};background-image:repeating-linear-gradient(135deg,rgba(130,123,119,0.07) 0 1px,transparent 1px 12px)">
+    <img src="{{ L.art }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    <button onClick="{{ toggleSave }}" aria-label="Save" style="position:absolute;right:10px;top:10px;width:32px;height:32px;border:none;border-radius:999px;background:rgba(255,255,255,0.94);display:flex;align-items:center;justify-content:center;cursor:pointer;color:{{ heartColor }}">
+      <x-import component-from-global-scope="ArvoDesignSystem_dcb547.Icon" name="FiHeart" size="{{ 16 }}" hint-size="16px,16px"></x-import>
+    </button>
+    <div style="position:absolute;left:10px;bottom:10px;right:10px;display:flex;flex-wrap:wrap;gap:6px">
+      <sc-if value="{{ discounted }}" hint-placeholder-val="{{ true }}">
+        <span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:var(--arvo-orange);color:#fff;font:600 14px/16px var(--font-brand);white-space:nowrap">{{ L.pill }}</span>
+      </sc-if>
+      <sc-if value="{{ L.atCost }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:#fff;color:var(--text-primary);box-shadow:inset 0 0 0 1px var(--sand-7);font:600 14px/16px var(--font-brand);white-space:nowrap">At cost</span>
+      </sc-if>
+      <sc-if value="{{ L.php }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,0.94);color:var(--text-primary);font:600 14px/16px var(--font-brand);white-space:nowrap">Post-handover plan</span>
+      </sc-if>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px;padding:14px 8px 8px;flex:1">
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <span style="font:600 18px/22px var(--font-brand);color:var(--text-primary)">{{ L.project }}</span>
+      <span style="font:400 13px/18px var(--font-core);color:var(--text-secondary);text-wrap:pretty">{{ L.community }} · {{ L.type }} · <span style="white-space:nowrap">{{ L.f.sqft }} sqft</span></span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <span style="font:500 12px/16px var(--font-core);color:var(--text-tertiary)">Pay today</span>
+      <span style="display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums"><span style="font:600 15px/1 var(--font-brand);color:var(--text-secondary)">AED</span><span style="font:600 30px/1 var(--font-brand);color:var(--text-primary);letter-spacing:-0.01em">{{ L.f.pay }}</span></span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 12px;margin-top:auto;padding-top:12px;border-top:1px solid rgba(130,123,119,0.18);font:400 13px/18px var(--font-core);color:var(--text-secondary);font-variant-numeric:tabular-nums">
+      <span style="white-space:nowrap">Remaining AED {{ L.f.remaining }}</span>
+      <span style="white-space:nowrap">Handover {{ L.handover }}</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;justify-content:space-between;font:400 12px/16px var(--font-core);color:var(--text-tertiary)"><span>Construction</span><span style="font-weight:600;color:var(--text-secondary)">{{ L.construction }}%</span></div>
+      <div style="height:6px;border-radius:999px;background:var(--arvo-chalk);box-shadow:inset 0 0 0 1px rgba(130,123,119,0.14);overflow:hidden"><div style="height:100%;width:{{ L.buildW }};border-radius:999px;background:var(--sand-3)"></div></div>
+    </div>
+  </div>
+</article>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:340,&quot;height&quot;:420},&quot;listing&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;},&quot;saved&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { saved: null };
+  renderVals() {
+    const L = this.props.listing || { f: {}, badges: [] };
+    const saved = this.state.saved ?? !!this.props.saved;
+    return {
+      L,
+      discounted: !L.atCost,
+      heartColor: saved ? 'var(--arvo-orange)' : 'var(--text-secondary)',
+      toggleSave: (e) => { e.stopPropagation(); this.setState({ saved: !saved }); },
+      open: () => { if (L.href) window.location.href = L.href; },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/* Arvo — webfonts.
+   The .fig carries no font binaries, so the four families it uses are pulled
+   from Google Fonts. `Inter Display` (the display cut used for 32/40px section
+   titles) is NOT distributed by Google Fonts — `Inter Tight` is substituted as
+   the nearest match. Flagged in readme.md; drop real files into assets/fonts/
+   and replace these rules when they are available. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Inter+Tight:wght@400..700&family=Blinker:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap");
+
+:root {
+  --font-core: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Inter Tight", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-brand: Blinker, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
